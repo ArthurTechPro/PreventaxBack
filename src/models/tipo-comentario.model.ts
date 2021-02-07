@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Comentarios} from './comentarios.model';
 
 @model()
 export class TipoComentario extends Entity {
@@ -15,6 +16,8 @@ export class TipoComentario extends Entity {
   })
   Descrip: string;
 
+  @hasMany(() => Comentarios, {keyTo: 'IdComent'})
+  FKTipComent: Comentarios[];
 
   constructor(data?: Partial<TipoComentario>) {
     super(data);

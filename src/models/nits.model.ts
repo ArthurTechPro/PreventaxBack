@@ -1,4 +1,6 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {NitInspec} from './nit-inspec.model';
+import {Usuarios} from './usuarios.model';
 
 @model()
 export class Nits extends Entity {
@@ -67,6 +69,21 @@ export class Nits extends Entity {
   })
   FechaCrea?: string;
 
+  @property({
+    type: 'number',
+  })
+  IdTipo?: number;
+
+  @hasMany(() => NitInspec, {keyTo: 'Nit'})
+  FKNitIsnp: NitInspec[];
+
+  @hasMany(() => Usuarios, {keyTo: 'Nit'})
+  FKNitUsu: Usuarios[];
+
+  @property({
+    type: 'number',
+  })
+  IdCiudad?: number;
 
   constructor(data?: Partial<Nits>) {
     super(data);

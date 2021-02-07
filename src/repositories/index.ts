@@ -27,3 +27,4 @@ export * from './veh-case.repository';
 export * from './veh-marca.repository';
 export * from './veh-servicio.repository';
 export * from './vehiculos.repository';
+export * from './nit-inspec.repository';

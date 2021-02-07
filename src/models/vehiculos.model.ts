@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Inspecciones} from './inspecciones.model';
 
 @model()
 export class Vehiculos extends Entity {
@@ -75,6 +76,23 @@ export class Vehiculos extends Entity {
   })
   VIN?: string;
 
+  @property({
+    type: 'number',
+  })
+  CodMarca?: number;
+
+  @property({
+    type: 'number',
+  })
+  CodClase?: number;
+
+  @property({
+    type: 'number',
+  })
+  CodServicio?: number;
+
+  @hasMany(() => Inspecciones, {keyTo: 'IdPlaca'})
+  FKVehInspec: Inspecciones[];
 
   constructor(data?: Partial<Vehiculos>) {
     super(data);

@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Inspecciones} from './inspecciones.model';
 
 @model()
 export class EstadoInspec extends Entity {
@@ -15,6 +16,8 @@ export class EstadoInspec extends Entity {
   })
   Descrip: string;
 
+  @hasMany(() => Inspecciones, {keyTo: 'IdEstado'})
+  FKEstInsp: Inspecciones[];
 
   constructor(data?: Partial<EstadoInspec>) {
     super(data);

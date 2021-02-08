@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {FotoInspec} from './foto-inspec.model';
 
 @model()
 export class TipoFoto extends Entity {
@@ -15,6 +16,8 @@ export class TipoFoto extends Entity {
   })
   Descrip: string;
 
+  @hasMany(() => FotoInspec, {keyTo: 'IdTipo'})
+  FKTipFoto: FotoInspec[];
 
   constructor(data?: Partial<TipoFoto>) {
     super(data);

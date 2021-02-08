@@ -14,6 +14,15 @@ export class Comentarios extends Entity {
   })
   Descrip?: string;
 
+  @property({
+    type: 'number',
+  })
+  IdComent?: number;
+
+  @property({
+    type: 'number',
+  })
+  IdRevision?: number;
 
   constructor(data?: Partial<Comentarios>) {
     super(data);

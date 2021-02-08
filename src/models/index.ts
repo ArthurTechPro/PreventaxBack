@@ -27,3 +27,4 @@ export * from './guia-valores.model';
 export * from './fasecolda.model';
 export * from './gen-ciuddes.model';
 export * from './gen-depto.model';
+export * from './nit-inspec.model';

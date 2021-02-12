@@ -1,5 +1,4 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Observacion} from './observacion.model';
+import {Entity, model, property} from '@loopback/repository';
 
 @model()
 export class Preguntas extends Entity {
@@ -19,12 +18,13 @@ export class Preguntas extends Entity {
   @property({
     type: 'string',
   })
-  ImputType?: string;
+  InputType?: string;
 
   @property({
     type: 'string',
+    required: true,
   })
-  Pregunta?: string;
+  Pregunta: string;
 
   @property({
     type: 'string',
@@ -39,15 +39,7 @@ export class Preguntas extends Entity {
   @property({
     type: 'number',
   })
-  Ponderado?: number;
-
-  @property({
-    type: 'number',
-  })
-  IdRevision?: number;
-
-  @hasMany(() => Observacion, {keyTo: 'IdPregunta'})
-  FKPregObs: Observacion[];
+  Pondera: number;
 
   constructor(data?: Partial<Preguntas>) {
     super(data);

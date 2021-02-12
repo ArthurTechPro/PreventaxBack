@@ -1,16 +1,16 @@
 import {inject} from '@loopback/core';
 import {DefaultCrudRepository} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {Usuarios, UsuariosRelations} from '../models';
+import {GenDeptos, GenDeptosRelations} from '../models';
 
-export class UsuariosRepository extends DefaultCrudRepository<
-  Usuarios,
-  typeof Usuarios.prototype.Id,
-  UsuariosRelations
+export class GenDeptosRepository extends DefaultCrudRepository<
+  GenDeptos,
+  typeof GenDeptos.prototype.Codigo,
+  GenDeptosRelations
 > {
   constructor(
     @inject('datasources.Postgres') dataSource: PostgresDataSource,
   ) {
-    super(Usuarios, dataSource);
+    super(GenDeptos, dataSource);
   }
 }

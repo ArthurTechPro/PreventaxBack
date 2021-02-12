@@ -1,7 +1,7 @@
 import {Entity, model, property} from '@loopback/repository';
 
 @model()
-export class TipoFoto extends Entity {
+export class TipoComent extends Entity {
   @property({
     type: 'number',
     id: true,
@@ -16,13 +16,13 @@ export class TipoFoto extends Entity {
   Descrip: string;
 
 
-  constructor(data?: Partial<TipoFoto>) {
+  constructor(data?: Partial<TipoComent>) {
     super(data);
   }
 }
 
-export interface TipoFotoRelations {
+export interface TipoComentRelations {
   // describe navigational properties here
 }
 
-export type TipoFotoWithRelations = TipoFoto & TipoFotoRelations;
+export type TipoComentWithRelations = TipoComent & TipoComentRelations;

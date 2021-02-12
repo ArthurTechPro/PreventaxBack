@@ -1,5 +1,4 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Vehiculos} from './vehiculos.model';
+import {Entity, model, property} from '@loopback/repository';
 
 @model()
 export class VehServicio extends Entity {
@@ -15,10 +14,8 @@ export class VehServicio extends Entity {
     type: 'string',
     required: true,
   })
-  Servicio: string;
+  Descrip: string;
 
-  @hasMany(() => Vehiculos, {keyTo: 'CodServicio'})
-  FKSvcVeh: Vehiculos[];
 
   constructor(data?: Partial<VehServicio>) {
     super(data);

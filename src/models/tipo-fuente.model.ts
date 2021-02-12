@@ -1,5 +1,4 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {ValorInspec} from './valor-inspec.model';
+import {Entity, model, property} from '@loopback/repository';
 
 @model()
 export class TipoFuente extends Entity {
@@ -16,8 +15,6 @@ export class TipoFuente extends Entity {
   })
   Descrip: string;
 
-  @hasMany(() => ValorInspec, {keyTo: 'IdTipoFuente'})
-  KFTipFuente: ValorInspec[];
 
   constructor(data?: Partial<TipoFuente>) {
     super(data);

@@ -1,6 +1,4 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {NitInspec} from './nit-inspec.model';
-import {Usuarios} from './usuarios.model';
+import {Entity, model, property} from '@loopback/repository';
 
 @model()
 export class Nits extends Entity {
@@ -8,31 +6,28 @@ export class Nits extends Entity {
     type: 'number',
     id: true,
     generated: false,
-    required: true,
   })
-  Nit: number;
+  Nit?: number;
 
   @property({
     type: 'number',
   })
-  dchequeo?: number;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  Nombres: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  Apellidos: string;
+  DChequeo?: number;
 
   @property({
     type: 'string',
   })
-  Direccion?: string;
+  Nombres?: string;
+
+  @property({
+    type: 'string',
+  })
+  Apellidos?: string;
+
+  @property({
+    type: 'string',
+  })
+  Direcciom?: string;
 
   @property({
     type: 'string',
@@ -69,21 +64,6 @@ export class Nits extends Entity {
   })
   FechaCrea?: string;
 
-  @property({
-    type: 'number',
-  })
-  IdTipo?: number;
-
-  @hasMany(() => NitInspec, {keyTo: 'Nit'})
-  FKNitIsnp: NitInspec[];
-
-  @hasMany(() => Usuarios, {keyTo: 'Nit'})
-  FKNitUsu: Usuarios[];
-
-  @property({
-    type: 'number',
-  })
-  IdCiudad?: number;
 
   constructor(data?: Partial<Nits>) {
     super(data);

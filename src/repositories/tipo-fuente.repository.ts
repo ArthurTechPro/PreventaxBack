@@ -1,21 +1,16 @@
-import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
-import {PgSqlDataSource} from '../datasources';
-import {TipoFuente, TipoFuenteRelations, ValorInspec} from '../models';
-import {ValorInspecRepository} from './valor-inspec.repository';
+import {inject} from '@loopback/core';
+import {DefaultCrudRepository} from '@loopback/repository';
+import {PostgresDataSource} from '../datasources';
+import {TipoFuente, TipoFuenteRelations} from '../models';
 
 export class TipoFuenteRepository extends DefaultCrudRepository<
   TipoFuente,
   typeof TipoFuente.prototype.Id,
   TipoFuenteRelations
 > {
-
-  public readonly KFTipFuente: HasManyRepositoryFactory<ValorInspec, typeof TipoFuente.prototype.Id>;
-
   constructor(
-    @inject('datasources.PgSql') dataSource: PgSqlDataSource, @repository.getter('ValorInspecRepository') protected valorInspecRepositoryGetter: Getter<ValorInspecRepository>,
+    @inject('datasources.Postgres') dataSource: PostgresDataSource,
   ) {
     super(TipoFuente, dataSource);
-    this.KFTipFuente = this.createHasManyRepositoryFactoryFor('KFTipFuente', valorInspecRepositoryGetter,);
   }
 }

@@ -1,6 +1,6 @@
 import {inject} from '@loopback/core';
 import {DefaultCrudRepository} from '@loopback/repository';
-import {PgSqlDataSource} from '../datasources';
+import {PostgresDataSource} from '../datasources';
 import {NitInspec, NitInspecRelations} from '../models';
 
 export class NitInspecRepository extends DefaultCrudRepository<
@@ -9,7 +9,7 @@ export class NitInspecRepository extends DefaultCrudRepository<
   NitInspecRelations
 > {
   constructor(
-    @inject('datasources.PgSql') dataSource: PgSqlDataSource,
+    @inject('datasources.Postgres') dataSource: PostgresDataSource,
   ) {
     super(NitInspec, dataSource);
   }

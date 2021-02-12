@@ -14,15 +14,6 @@ export class FotoInspec extends Entity {
   })
   Url?: string;
 
-  @property({
-    type: 'number',
-  })
-  IdTipo?: number;
-
-  @property({
-    type: 'number',
-  })
-  IdInspec?: number;
 
   constructor(data?: Partial<FotoInspec>) {
     super(data);

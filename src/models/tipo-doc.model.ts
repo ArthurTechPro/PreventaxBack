@@ -1,5 +1,4 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Nits} from './nits.model';
+import {Entity, model, property} from '@loopback/repository';
 
 @model()
 export class TipoDoc extends Entity {
@@ -16,8 +15,6 @@ export class TipoDoc extends Entity {
   })
   Descrip: string;
 
-  @hasMany(() => Nits, {keyTo: 'IdTipo'})
-  FKTipoNit: Nits[];
 
   constructor(data?: Partial<TipoDoc>) {
     super(data);

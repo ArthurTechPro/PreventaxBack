@@ -1,21 +1,16 @@
-import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
-import {PgSqlDataSource} from '../datasources';
-import {VehServicio, VehServicioRelations, Vehiculos} from '../models';
-import {VehiculosRepository} from './vehiculos.repository';
+import {inject} from '@loopback/core';
+import {DefaultCrudRepository} from '@loopback/repository';
+import {PostgresDataSource} from '../datasources';
+import {VehServicio, VehServicioRelations} from '../models';
 
 export class VehServicioRepository extends DefaultCrudRepository<
   VehServicio,
   typeof VehServicio.prototype.Codigo,
   VehServicioRelations
 > {
-
-  public readonly FKSvcVeh: HasManyRepositoryFactory<Vehiculos, typeof VehServicio.prototype.Codigo>;
-
   constructor(
-    @inject('datasources.PgSql') dataSource: PgSqlDataSource, @repository.getter('VehiculosRepository') protected vehiculosRepositoryGetter: Getter<VehiculosRepository>,
+    @inject('datasources.Postgres') dataSource: PostgresDataSource,
   ) {
     super(VehServicio, dataSource);
-    this.FKSvcVeh = this.createHasManyRepositoryFactoryFor('FKSvcVeh', vehiculosRepositoryGetter,);
   }
 }

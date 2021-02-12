@@ -1,6 +1,4 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Comentarios} from './comentarios.model';
-import {Preguntas} from './preguntas.model';
+import {Entity, model, property} from '@loopback/repository';
 
 @model()
 export class Revisiones extends Entity {
@@ -27,16 +25,6 @@ export class Revisiones extends Entity {
   })
   Aceptacion?: number;
 
-  @hasMany(() => Comentarios, {keyTo: 'IdRevision'})
-  FKRevComent: Comentarios[];
-
-  @hasMany(() => Preguntas, {keyTo: 'IdRevision'})
-  KFRevPreg: Preguntas[];
-
-  @property({
-    type: 'number',
-  })
-  IdProducto?: number;
 
   constructor(data?: Partial<Revisiones>) {
     super(data);

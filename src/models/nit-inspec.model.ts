@@ -9,20 +9,6 @@ export class NitInspec extends Entity {
   })
   Id?: number;
 
-  @property({
-    type: 'number',
-  })
-  IdTipo?: number;
-
-  @property({
-    type: 'number',
-  })
-  Nit?: number;
-
-  @property({
-    type: 'number',
-  })
-  IdInspec?: number;
 
   constructor(data?: Partial<NitInspec>) {
     super(data);

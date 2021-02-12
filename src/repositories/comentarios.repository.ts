@@ -1,6 +1,6 @@
 import {inject} from '@loopback/core';
 import {DefaultCrudRepository} from '@loopback/repository';
-import {PgSqlDataSource} from '../datasources';
+import {PostgresDataSource} from '../datasources';
 import {Comentarios, ComentariosRelations} from '../models';
 
 export class ComentariosRepository extends DefaultCrudRepository<
@@ -9,7 +9,7 @@ export class ComentariosRepository extends DefaultCrudRepository<
   ComentariosRelations
 > {
   constructor(
-    @inject('datasources.PgSql') dataSource: PgSqlDataSource,
+    @inject('datasources.Postgres') dataSource: PostgresDataSource,
   ) {
     super(Comentarios, dataSource);
   }

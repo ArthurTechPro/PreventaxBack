@@ -1,6 +1,6 @@
 import {inject} from '@loopback/core';
 import {DefaultCrudRepository} from '@loopback/repository';
-import {PgSqlDataSource} from '../datasources';
+import {PostgresDataSource} from '../datasources';
 import {FotoInspec, FotoInspecRelations} from '../models';
 
 export class FotoInspecRepository extends DefaultCrudRepository<
@@ -9,7 +9,7 @@ export class FotoInspecRepository extends DefaultCrudRepository<
   FotoInspecRelations
 > {
   constructor(
-    @inject('datasources.PgSql') dataSource: PgSqlDataSource,
+    @inject('datasources.Postgres') dataSource: PostgresDataSource,
   ) {
     super(FotoInspec, dataSource);
   }

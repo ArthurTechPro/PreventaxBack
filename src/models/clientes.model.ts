@@ -38,10 +38,6 @@ export class Clientes extends Entity {
   })
   FechaCrea: string;
 
-  @property({
-    type: 'number',
-  })
-  IdEstado?: number;
 
   constructor(data?: Partial<Clientes>) {
     super(data);

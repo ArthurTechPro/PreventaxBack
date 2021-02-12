@@ -1,5 +1,4 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Inspecciones} from './inspecciones.model';
+import {Entity, model, property} from '@loopback/repository';
 
 @model()
 export class Usuarios extends Entity {
@@ -26,7 +25,7 @@ export class Usuarios extends Entity {
     type: 'string',
     required: true,
   })
-  Passord: string;
+  Passsword: string;
 
   @property({
     type: 'boolean',
@@ -45,23 +44,6 @@ export class Usuarios extends Entity {
   })
   FechaCrea: string;
 
-  @property({
-    type: 'number',
-  })
-  IdEstado?: number;
-
-  @property({
-    type: 'number',
-  })
-  IdRoll?: number;
-
-  @property({
-    type: 'number',
-  })
-  Nit?: number;
-
-  @hasMany(() => Inspecciones, {keyTo: 'IdUsuario'})
-  FKUsuInspec: Inspecciones[];
 
   constructor(data?: Partial<Usuarios>) {
     super(data);

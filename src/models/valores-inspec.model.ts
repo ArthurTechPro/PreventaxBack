@@ -19,6 +19,15 @@ export class ValoresInspec extends Entity {
   })
   Valor?: number;
 
+  @property({
+    type: 'number',
+  })
+  IdTipo?: number;
+
+  @property({
+    type: 'number',
+  })
+  IdInspec?: number;
 
   constructor(data?: Partial<ValoresInspec>) {
     super(data);

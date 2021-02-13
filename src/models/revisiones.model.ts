@@ -1,4 +1,6 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, hasMany, model, property} from '@loopback/repository';
+import {Preguntas} from './preguntas.model';
+import {Observaciones} from './observaciones.model';
 
 @model()
 export class Revisiones extends Entity {
@@ -25,6 +27,21 @@ export class Revisiones extends Entity {
   })
   Aceptacion?: number;
 
+  @property({
+    type: 'number',
+  })
+  IdProduc?: number;
+
+  @hasMany(() => Preguntas, {keyTo: 'IdRevision'})
+  RevPre: Preguntas[];
+
+  @property({
+    type: 'number',
+  })
+  IdComent?: number;
+
+  @hasMany(() => Observaciones, {keyTo: 'IdRevision'})
+  RevisionObs: Observaciones[];
 
   constructor(data?: Partial<Revisiones>) {
     super(data);

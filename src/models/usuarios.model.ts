@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Inspecciones} from './inspecciones.model';
 
 @model()
 export class Usuarios extends Entity {
@@ -44,6 +45,23 @@ export class Usuarios extends Entity {
   })
   FechaCrea: string;
 
+  @property({
+    type: 'number',
+  })
+  IdEstado?: number;
+
+  @property({
+    type: 'number',
+  })
+  IdRoll?: number;
+
+  @property({
+    type: 'number',
+  })
+  IdNit?: number;
+
+  @hasMany(() => Inspecciones, {keyTo: 'IdUsuario'})
+  UsrInspec: Inspecciones[];
 
   constructor(data?: Partial<Usuarios>) {
     super(data);

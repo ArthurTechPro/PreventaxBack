@@ -1,4 +1,8 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, hasMany, model, property} from '@loopback/repository';
+import {FotoInspec} from './foto-inspec.model';
+import {NitInspec} from './nit-inspec.model';
+import {Observaciones} from './observaciones.model';
+import {ValoresInspec} from './valores-inspec.model';
 
 @model()
 export class Inspecciones extends Entity {
@@ -47,6 +51,37 @@ export class Inspecciones extends Entity {
   })
   JSONRevision?: string;
 
+  @property({
+    type: 'number',
+  })
+  IdEstado?: number;
+
+  @hasMany(() => NitInspec, {keyTo: 'IdInspec'})
+  InspecNit: NitInspec[];
+
+  @property({
+    type: 'number',
+  })
+  IdUsuario?: number;
+
+  @property({
+    type: 'number',
+  })
+  IdProduc?: number;
+
+  @property({
+    type: 'string',
+  })
+  IdPlaca?: string;
+
+  @hasMany(() => ValoresInspec, {keyTo: 'IdInspec'})
+  InspecVal: ValoresInspec[];
+
+  @hasMany(() => FotoInspec, {keyTo: 'IdInspec'})
+  InspecFoto: FotoInspec[];
+
+  @hasMany(() => Observaciones, {keyTo: 'IdInspec'})
+  InspecObs: Observaciones[];
 
   constructor(data?: Partial<Inspecciones>) {
     super(data);

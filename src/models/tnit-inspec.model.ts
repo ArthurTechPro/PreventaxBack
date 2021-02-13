@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {NitInspec} from './nit-inspec.model';
 
 @model()
 export class TnitInspec extends Entity {
@@ -15,6 +16,8 @@ export class TnitInspec extends Entity {
   })
   Descrip: string;
 
+  @hasMany(() => NitInspec, {keyTo: 'IdTipoNit'})
+  TnitInspec: NitInspec[];
 
   constructor(data?: Partial<TnitInspec>) {
     super(data);

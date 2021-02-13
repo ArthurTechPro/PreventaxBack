@@ -19,6 +19,20 @@ export class Observaciones extends Entity {
   })
   Descrip?: string;
 
+  @property({
+    type: 'number',
+  })
+  IdPregunta?: number;
+
+  @property({
+    type: 'number',
+  })
+  IdInspec?: number;
+
+  @property({
+    type: 'number',
+  })
+  IdRevision?: number;
 
   constructor(data?: Partial<Observaciones>) {
     super(data);

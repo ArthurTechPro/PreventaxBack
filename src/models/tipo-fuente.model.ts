@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {ValoresInspec} from './valores-inspec.model';
 
 @model()
 export class TipoFuente extends Entity {
@@ -15,6 +16,8 @@ export class TipoFuente extends Entity {
   })
   Descrip: string;
 
+  @hasMany(() => ValoresInspec, {keyTo: 'IdTipo'})
+  TipoVal: ValoresInspec[];
 
   constructor(data?: Partial<TipoFuente>) {
     super(data);

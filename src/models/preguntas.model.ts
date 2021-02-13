@@ -1,4 +1,6 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Observaciones} from './observaciones.model';
+import {FotoInspec} from './foto-inspec.model';
 
 @model()
 export class Preguntas extends Entity {
@@ -40,6 +42,17 @@ export class Preguntas extends Entity {
     type: 'number',
   })
   Pondera: number;
+
+  @property({
+    type: 'number',
+  })
+  IdRevision?: number;
+
+  @hasMany(() => Observaciones, {keyTo: 'IdPregunta'})
+  PreObs: Observaciones[];
+
+  @hasMany(() => FotoInspec, {keyTo: 'IdPregunta'})
+  PreFoto: FotoInspec[];
 
   constructor(data?: Partial<Preguntas>) {
     super(data);

@@ -1,15 +1,15 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 import {GenCiudades} from './gen-ciudades.model';
 
 @model()
 export class GenDeptos extends Entity {
   @property({
-    type: 'number',
+    type: 'string',
     id: true,
     generated: false,
     required: true,
   })
-  Codigo: number;
+  Codigo: string;
 
   @property({
     type: 'string',

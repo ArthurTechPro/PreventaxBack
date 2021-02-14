@@ -1,6 +1,6 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Usuarios} from './usuarios.model';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 import {NitInspec} from './nit-inspec.model';
+import {Usuarios} from './usuarios.model';
 
 @model()
 export class Nits extends Entity {
@@ -67,9 +67,9 @@ export class Nits extends Entity {
   FechaCrea?: string;
 
   @property({
-    type: 'number',
+    type: 'string',
   })
-  CodCiudad?: number;
+  CodCiudad?: string;
 
   @property({
     type: 'number',

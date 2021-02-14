@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,11 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   GenCiudades,
-  Nits,
+  Nits
 } from '../models';
 import {GenCiudadesRepository} from '../repositories';
 
@@ -39,7 +39,7 @@ export class GenCiudadesNitsController {
     },
   })
   async find(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @param.query.object('filter') filter?: Filter<Nits>,
   ): Promise<Nits[]> {
     return this.genCiudadesRepository.CiuNit(id).find(filter);
@@ -79,7 +79,7 @@ export class GenCiudadesNitsController {
     },
   })
   async patch(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
@@ -102,7 +102,7 @@ export class GenCiudadesNitsController {
     },
   })
   async delete(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @param.query.object('where', getWhereSchemaFor(Nits)) where?: Where<Nits>,
   ): Promise<Count> {
     return this.genCiudadesRepository.CiuNit(id).delete(where);

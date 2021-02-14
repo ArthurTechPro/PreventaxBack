@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  GenDeptos,
-  GenCiudades,
+  GenCiudades, GenDeptos
 } from '../models';
 import {GenDeptosRepository} from '../repositories';
 
@@ -39,7 +38,7 @@ export class GenDeptosGenCiudadesController {
     },
   })
   async find(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @param.query.object('filter') filter?: Filter<GenCiudades>,
   ): Promise<GenCiudades[]> {
     return this.genDeptosRepository.DepCiu(id).find(filter);
@@ -79,7 +78,7 @@ export class GenDeptosGenCiudadesController {
     },
   })
   async patch(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
@@ -102,7 +101,7 @@ export class GenDeptosGenCiudadesController {
     },
   })
   async delete(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @param.query.object('where', getWhereSchemaFor(GenCiudades)) where?: Where<GenCiudades>,
   ): Promise<Count> {
     return this.genDeptosRepository.DepCiu(id).delete(where);

@@ -16,6 +16,11 @@ export class Clientes extends Entity {
   Usuario: string;
 
   @property({
+    type: 'number'
+  })
+  IdNits: number;
+
+  @property({
     type: 'string',
     required: true,
   })
@@ -34,9 +39,9 @@ export class Clientes extends Entity {
 
   @property({
     type: 'date',
-    required: true,
+    defaultFn: "now",
   })
-  FechaCrea: string;
+  FechaCrea?: string;
 
   @property({
     type: 'number',

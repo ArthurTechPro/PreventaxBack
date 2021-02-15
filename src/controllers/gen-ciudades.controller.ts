@@ -109,7 +109,7 @@ export class GenCiudadesController {
     },
   })
   async findById(
-    @param.path.string('id') id: string,
+    @param.path.number('id') id: number,
     @param.filter(GenCiudades, {exclude: 'where'}) filter?: FilterExcludingWhere<GenCiudades>
   ): Promise<GenCiudades> {
     return this.genCiudadesRepository.findById(id, filter);
@@ -120,7 +120,7 @@ export class GenCiudadesController {
     description: 'GenCiudades PATCH success',
   })
   async updateById(
-    @param.path.string('id') id: string,
+    @param.path.number('id') id: number,
     @requestBody({
       content: {
         'application/json': {
@@ -138,7 +138,7 @@ export class GenCiudadesController {
     description: 'GenCiudades PUT success',
   })
   async replaceById(
-    @param.path.string('id') id: string,
+    @param.path.number('id') id: number,
     @requestBody() genCiudades: GenCiudades,
   ): Promise<void> {
     await this.genCiudadesRepository.replaceById(id, genCiudades);
@@ -148,7 +148,7 @@ export class GenCiudadesController {
   @response(204, {
     description: 'GenCiudades DELETE success',
   })
-  async deleteById(@param.path.string('id') id: string): Promise<void> {
+  async deleteById(@param.path.number('id') id: number): Promise<void> {
     await this.genCiudadesRepository.deleteById(id);
   }
 }

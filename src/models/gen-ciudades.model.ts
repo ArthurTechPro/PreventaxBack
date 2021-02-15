@@ -4,12 +4,12 @@ import {Nits} from './nits.model';
 @model()
 export class GenCiudades extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     generated: false,
     required: true,
   })
-  Codigo: string;
+  Codigo: number;
 
   @property({
     type: 'string',
@@ -18,9 +18,9 @@ export class GenCiudades extends Entity {
   Descrip: string;
 
   @property({
-    type: 'string',
+    type: 'number',
   })
-  CodDepto?: string;
+  CodDepto?: number;
 
   @hasMany(() => Nits, {keyTo: 'CodCiudad'})
   CiuNit: Nits[];

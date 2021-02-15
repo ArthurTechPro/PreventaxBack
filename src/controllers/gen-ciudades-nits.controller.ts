@@ -39,7 +39,7 @@ export class GenCiudadesNitsController {
     },
   })
   async find(
-    @param.path.string('id') id: string,
+    @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<Nits>,
   ): Promise<Nits[]> {
     return this.genCiudadesRepository.CiuNit(id).find(filter);
@@ -79,7 +79,7 @@ export class GenCiudadesNitsController {
     },
   })
   async patch(
-    @param.path.string('id') id: string,
+    @param.path.number('id') id: number,
     @requestBody({
       content: {
         'application/json': {
@@ -102,7 +102,7 @@ export class GenCiudadesNitsController {
     },
   })
   async delete(
-    @param.path.string('id') id: string,
+    @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(Nits)) where?: Where<Nits>,
   ): Promise<Count> {
     return this.genCiudadesRepository.CiuNit(id).delete(where);

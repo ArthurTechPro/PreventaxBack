@@ -38,7 +38,7 @@ export class GenDeptosGenCiudadesController {
     },
   })
   async find(
-    @param.path.string('id') id: string,
+    @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<GenCiudades>,
   ): Promise<GenCiudades[]> {
     return this.genDeptosRepository.DepCiu(id).find(filter);
@@ -78,7 +78,7 @@ export class GenDeptosGenCiudadesController {
     },
   })
   async patch(
-    @param.path.string('id') id: string,
+    @param.path.number('id') id: number,
     @requestBody({
       content: {
         'application/json': {
@@ -101,7 +101,7 @@ export class GenDeptosGenCiudadesController {
     },
   })
   async delete(
-    @param.path.string('id') id: string,
+    @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(GenCiudades)) where?: Where<GenCiudades>,
   ): Promise<Count> {
     return this.genDeptosRepository.DepCiu(id).delete(where);

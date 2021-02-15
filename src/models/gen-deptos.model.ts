@@ -4,12 +4,12 @@ import {GenCiudades} from './gen-ciudades.model';
 @model()
 export class GenDeptos extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     generated: false,
     required: true,
   })
-  Codigo: string;
+  Codigo: number;
 
   @property({
     type: 'string',

@@ -1,10 +1,10 @@
 import {Getter, inject} from '@loopback/core';
-import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
+import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {Nits, NitsRelations, Usuarios, NitInspec} from '../models';
+import {NitInspec, Nits, NitsRelations, Usuarios} from '../models';
 import {GenCiudadesRepository} from './gen-ciudades.repository';
-import {UsuariosRepository} from './usuarios.repository';
 import {NitInspecRepository} from './nit-inspec.repository';
+import {UsuariosRepository} from './usuarios.repository';
 
 export class NitsRepository extends DefaultCrudRepository<
   Nits,

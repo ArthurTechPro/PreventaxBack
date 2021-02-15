@@ -63,13 +63,14 @@ export class Nits extends Entity {
 
   @property({
     type: 'date',
+    defaultFn: "now",
   })
   FechaCrea?: string;
 
   @property({
-    type: 'string',
+    type: 'number',
   })
-  CodCiudad?: string;
+  CodCiudad?: number;
 
   @property({
     type: 'number',

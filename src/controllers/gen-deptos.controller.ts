@@ -109,7 +109,7 @@ export class GenDeptosController {
     },
   })
   async findById(
-    @param.path.string('id') id: string,
+    @param.path.number('id') id: number,
     @param.filter(GenDeptos, {exclude: 'where'}) filter?: FilterExcludingWhere<GenDeptos>
   ): Promise<GenDeptos> {
     return this.genDeptosRepository.findById(id, filter);
@@ -120,7 +120,7 @@ export class GenDeptosController {
     description: 'GenDeptos PATCH success',
   })
   async updateById(
-    @param.path.string('id') id: string,
+    @param.path.number('id') id: number,
     @requestBody({
       content: {
         'application/json': {
@@ -138,7 +138,7 @@ export class GenDeptosController {
     description: 'GenDeptos PUT success',
   })
   async replaceById(
-    @param.path.string('id') id: string,
+    @param.path.number('id') id: number,
     @requestBody() genDeptos: GenDeptos,
   ): Promise<void> {
     await this.genDeptosRepository.replaceById(id, genDeptos);
@@ -148,7 +148,7 @@ export class GenDeptosController {
   @response(204, {
     description: 'GenDeptos DELETE success',
   })
-  async deleteById(@param.path.string('id') id: string): Promise<void> {
+  async deleteById(@param.path.number('id') id: number): Promise<void> {
     await this.genDeptosRepository.deleteById(id);
   }
 }

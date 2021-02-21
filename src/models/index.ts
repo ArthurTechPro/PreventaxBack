@@ -1,13 +1,14 @@
+
+export * from './ciudades.model';
 export * from './clases.model';
 export * from './clientes.model';
 export * from './comentarios.model';
+export * from './deptos.model';
 export * from './estado-cli.model';
 export * from './estado-inspec.model';
 export * from './estado-prod.model';
 export * from './estado-usu.model';
 export * from './foto-inspec.model';
-export * from './gen-ciudades.model';
-export * from './gen-deptos.model';
 export * from './inspecciones.model';
 export * from './marcas.model';
 export * from './nit-inspec.model';
@@ -26,5 +27,3 @@ export * from './tnit-inspec.model';
 export * from './usuarios.model';
 export * from './valor-inspec.model';
 export * from './vehiculos.model';
-
-

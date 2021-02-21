@@ -2,7 +2,7 @@ import {Entity, hasMany, model, property} from '@loopback/repository';
 import {Nits} from './nits.model';
 
 @model()
-export class GenCiudades extends Entity {
+export class Ciudades extends Entity {
   @property({
     type: 'number',
     id: true,
@@ -35,13 +35,13 @@ export class GenCiudades extends Entity {
   @hasMany(() => Nits, {keyTo: 'IdCiudad'})
   FKCiuNit: Nits[];
 
-  constructor(data?: Partial<GenCiudades>) {
+  constructor(data?: Partial<Ciudades>) {
     super(data);
   }
 }
 
-export interface GenCiudadesRelations {
+export interface CiudadesRelations {
   // describe navigational properties here
 }
 
-export type GenCiudadesWithRelations = GenCiudades & GenCiudadesRelations;
+export type CiudadesWithRelations = Ciudades & CiudadesRelations;

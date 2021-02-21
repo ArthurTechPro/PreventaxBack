@@ -4,79 +4,83 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
-import {GenDeptos} from '../models';
-import {GenDeptosRepository} from '../repositories';
+import {Deptos} from '../models';
+import {DeptosRepository} from '../repositories';
 
 export class GenDeptosController {
   constructor(
-    @repository(GenDeptosRepository)
-    public genDeptosRepository : GenDeptosRepository,
-  ) {}
+    @repository(DeptosRepository)
+    public deptosRepository: DeptosRepository,
+  ) { }
 
-  @post('/gen-deptos')
+  @post('/deptos')
   @response(200, {
     description: 'GenDeptos model instance',
-    content: {'application/json': {schema: getModelSchemaRef(GenDeptos)}},
+    content: {'application/json': {schema: getModelSchemaRef(Deptos)}},
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(GenDeptos, {
+          schema: getModelSchemaRef(Deptos, {
             title: 'NewGenDeptos',
-            
+
           }),
         },
       },
     })
-    genDeptos: GenDeptos,
-  ): Promise<GenDeptos> {
-    return this.genDeptosRepository.create(genDeptos);
+    deptos: Deptos,
+  ): Promise<Deptos> {
+    return this.deptosRepository.create(deptos);
   }
 
-  @get('/gen-deptos/count')
+  @get('/deptos/count')
   @response(200, {
     description: 'GenDeptos model count',
     content: {'application/json': {schema: CountSchema}},
   })
   async count(
-    @param.where(GenDeptos) where?: Where<GenDeptos>,
+    @param.where(Deptos) where?: Where<Deptos>,
   ): Promise<Count> {
-    return this.genDeptosRepository.count(where);
+    return this.deptosRepository.count(where);
   }
 
-  @get('/gen-deptos')
+  @get('/deptos')
   @response(200, {
     description: 'Array of GenDeptos model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(GenDeptos, {includeRelations: true}),
+          items: getModelSchemaRef(Deptos, {includeRelations: true}),
         },
       },
     },
   })
   async find(
-    @param.filter(GenDeptos) filter?: Filter<GenDeptos>,
-  ): Promise<GenDeptos[]> {
-    return this.genDeptosRepository.find(filter);
+    @param.filter(Deptos) filter?: Filter<Deptos>,
+  ): Promise<Deptos[]> {
+    return this.deptosRepository.find(filter);
   }
 
-  @patch('/gen-deptos')
+  @patch('/deptos')
   @response(200, {
     description: 'GenDeptos PATCH success count',
     content: {'application/json': {schema: CountSchema}},
@@ -85,33 +89,33 @@ export class GenDeptosController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(GenDeptos, {partial: true}),
+          schema: getModelSchemaRef(Deptos, {partial: true}),
         },
       },
     })
-    genDeptos: GenDeptos,
-    @param.where(GenDeptos) where?: Where<GenDeptos>,
+    deptos: Deptos,
+    @param.where(Deptos) where?: Where<Deptos>,
   ): Promise<Count> {
-    return this.genDeptosRepository.updateAll(genDeptos, where);
+    return this.deptosRepository.updateAll(deptos, where);
   }
 
-  @get('/gen-deptos/{id}')
+  @get('/deptos/{id}')
   @response(200, {
     description: 'GenDeptos model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(GenDeptos, {includeRelations: true}),
+        schema: getModelSchemaRef(Deptos, {includeRelations: true}),
       },
     },
   })
   async findById(
     @param.path.number('id') id: number,
-    @param.filter(GenDeptos, {exclude: 'where'}) filter?: FilterExcludingWhere<GenDeptos>
-  ): Promise<GenDeptos> {
-    return this.genDeptosRepository.findById(id, filter);
+    @param.filter(Deptos, {exclude: 'where'}) filter?: FilterExcludingWhere<Deptos>
+  ): Promise<Deptos> {
+    return this.deptosRepository.findById(id, filter);
   }
 
-  @patch('/gen-deptos/{id}')
+  @patch('/deptos/{id}')
   @response(204, {
     description: 'GenDeptos PATCH success',
   })
@@ -120,31 +124,31 @@ export class GenDeptosController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(GenDeptos, {partial: true}),
+          schema: getModelSchemaRef(Deptos, {partial: true}),
         },
       },
     })
-    genDeptos: GenDeptos,
+    deptos: Deptos,
   ): Promise<void> {
-    await this.genDeptosRepository.updateById(id, genDeptos);
+    await this.deptosRepository.updateById(id, deptos);
   }
 
-  @put('/gen-deptos/{id}')
+  @put('/deptos/{id}')
   @response(204, {
     description: 'GenDeptos PUT success',
   })
   async replaceById(
     @param.path.number('id') id: number,
-    @requestBody() genDeptos: GenDeptos,
+    @requestBody() deptos: Deptos,
   ): Promise<void> {
-    await this.genDeptosRepository.replaceById(id, genDeptos);
+    await this.deptosRepository.replaceById(id, deptos);
   }
 
-  @del('/gen-deptos/{id}')
+  @del('/deptos/{id}')
   @response(204, {
     description: 'GenDeptos DELETE success',
   })
   async deleteById(@param.path.number('id') id: number): Promise<void> {
-    await this.genDeptosRepository.deleteById(id);
+    await this.deptosRepository.deleteById(id);
   }
 }

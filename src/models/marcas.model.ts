@@ -1,4 +1,4 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 import {Vehiculos} from './vehiculos.model';
 
 @model()
@@ -39,4 +39,4 @@ export interface MarcasRelations {
   // describe navigational properties here
 }
 
-export type MarcsWithRelations = Marcas & MarcasRelations;
+export type MarcasWithRelations = Marcas & MarcasRelations;

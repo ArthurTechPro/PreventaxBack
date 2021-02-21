@@ -1,8 +1,8 @@
 import {Entity, hasMany, model, property} from '@loopback/repository';
-import {GenCiudades} from './gen-ciudades.model';
+import {Ciudades} from './ciudades.model';
 
 @model()
-export class GenDeptos extends Entity {
+export class Deptos extends Entity {
   @property({
     type: 'number',
     id: true,
@@ -27,16 +27,16 @@ export class GenDeptos extends Entity {
   })
   Descrip: string;
 
-  @hasMany(() => GenCiudades, {keyTo: 'IdDepto'})
-  FKDeptosCiudad: GenCiudades[];
+  @hasMany(() => Ciudades, {keyTo: 'IdDepto'})
+  FKDeptosCiudad: Ciudades[];
 
-  constructor(data?: Partial<GenDeptos>) {
+  constructor(data?: Partial<Deptos>) {
     super(data);
   }
 }
 
-export interface GenDeptosRelations {
+export interface DeptosRelations {
   // describe navigational properties here
 }
 
-export type GenDeptosWithRelations = GenDeptos & GenDeptosRelations;
+export type DeptosWithRelations = Deptos & DeptosRelations;

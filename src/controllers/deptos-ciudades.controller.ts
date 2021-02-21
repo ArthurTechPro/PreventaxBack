@@ -16,22 +16,22 @@ import {
   requestBody
 } from '@loopback/rest';
 import {
-  GenCiudades, GenDeptos
+  Ciudades, Deptos
 } from '../models';
-import {GenDeptosRepository} from '../repositories';
+import {DeptosRepository} from '../repositories';
 
 export class GenDeptosGenCiudadesController {
   constructor(
-    @repository(GenDeptosRepository) protected genDeptosRepository: GenDeptosRepository,
+    @repository(DeptosRepository) protected deptosRepository: DeptosRepository,
   ) { }
 
-  @get('/gen-deptos/{id}/gen-ciudades', {
+  @get('/deptos/{id}/gen-ciudades', {
     responses: {
       '200': {
         description: 'Array of GenDeptos has many GenCiudades',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(GenCiudades)},
+            schema: {type: 'array', items: getModelSchemaRef(Ciudades)},
           },
         },
       },
@@ -39,37 +39,37 @@ export class GenDeptosGenCiudadesController {
   })
   async find(
     @param.path.number('id') id: number,
-    @param.query.object('filter') filter?: Filter<GenCiudades>,
-  ): Promise<GenCiudades[]> {
-    return this.genDeptosRepository.FKDeptosCiudad(id).find(filter);
+    @param.query.object('filter') filter?: Filter<Ciudades>,
+  ): Promise<Ciudades[]> {
+    return this.deptosRepository.FKDeptosCiudad(id).find(filter);
   }
 
-  @post('/gen-deptos/{id}/gen-ciudades', {
+  @post('/deptos/{id}/gen-ciudades', {
     responses: {
       '200': {
         description: 'GenDeptos model instance',
-        content: {'application/json': {schema: getModelSchemaRef(GenCiudades)}},
+        content: {'application/json': {schema: getModelSchemaRef(Ciudades)}},
       },
     },
   })
   async create(
-    @param.path.number('id') id: typeof GenDeptos.prototype.IdDepto,
+    @param.path.number('id') id: typeof Deptos.prototype.IdDepto,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(GenCiudades, {
+          schema: getModelSchemaRef(Ciudades, {
             title: 'NewGenCiudadesInGenDeptos',
             exclude: ['IdCiudad'],
             optional: ['IdDepto']
           }),
         },
       },
-    }) genCiudades: Omit<GenCiudades, 'IdCiudad'>,
-  ): Promise<GenCiudades> {
-    return this.genDeptosRepository.FKDeptosCiudad(id).create(genCiudades);
+    }) ciudades: Omit<Ciudades, 'IdCiudad'>,
+  ): Promise<Ciudades> {
+    return this.deptosRepository.FKDeptosCiudad(id).create(ciudades);
   }
 
-  @patch('/gen-deptos/{id}/gen-ciudades', {
+  @patch('/deptos/{id}/gen-ciudades', {
     responses: {
       '200': {
         description: 'GenDeptos.GenCiudades PATCH success count',
@@ -82,17 +82,17 @@ export class GenDeptosGenCiudadesController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(GenCiudades, {partial: true}),
+          schema: getModelSchemaRef(Ciudades, {partial: true}),
         },
       },
     })
-    genCiudades: Partial<GenCiudades>,
-    @param.query.object('where', getWhereSchemaFor(GenCiudades)) where?: Where<GenCiudades>,
+    ciudades: Partial<Ciudades>,
+    @param.query.object('where', getWhereSchemaFor(Ciudades)) where?: Where<Ciudades>,
   ): Promise<Count> {
-    return this.genDeptosRepository.FKDeptosCiudad(id).patch(genCiudades, where);
+    return this.deptosRepository.FKDeptosCiudad(id).patch(ciudades, where);
   }
 
-  @del('/gen-deptos/{id}/gen-ciudades', {
+  @del('/deptos/{id}/gen-ciudades', {
     responses: {
       '200': {
         description: 'GenDeptos.GenCiudades DELETE success count',
@@ -102,8 +102,8 @@ export class GenDeptosGenCiudadesController {
   })
   async delete(
     @param.path.number('id') id: number,
-    @param.query.object('where', getWhereSchemaFor(GenCiudades)) where?: Where<GenCiudades>,
+    @param.query.object('where', getWhereSchemaFor(Ciudades)) where?: Where<Ciudades>,
   ): Promise<Count> {
-    return this.genDeptosRepository.FKDeptosCiudad(id).delete(where);
+    return this.deptosRepository.FKDeptosCiudad(id).delete(where);
   }
 }

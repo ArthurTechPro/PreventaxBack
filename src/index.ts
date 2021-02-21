@@ -5,7 +5,7 @@ export * from './application';
 export async function main(options: ApplicationConfig = {}) {
   const app = new PrevenTaxApp(options);
   await app.boot();
-  await app.migrateSchema();
+  await app.migrateSchema();   // Migra Automaticamente en el "npm start"
   await app.start();
 
   const url = app.restServer.url;

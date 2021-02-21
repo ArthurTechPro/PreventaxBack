@@ -15,18 +15,15 @@ import {
   post,
   requestBody
 } from '@loopback/rest';
-import {
-  GenCiudades,
-  Nits
-} from '../models';
-import {GenCiudadesRepository} from '../repositories';
+import {Ciudades, Nits} from '../models';
+import {CiudadesRepository} from '../repositories';
 
-export class GenCiudadesNitsController {
+export class CiudadesNitsController {
   constructor(
-    @repository(GenCiudadesRepository) protected genCiudadesRepository: GenCiudadesRepository,
+    @repository(CiudadesRepository) protected ciudadesRepository: CiudadesRepository,
   ) { }
 
-  @get('/gen-ciudades/{id}/nits', {
+  @get('/ciudades/{id}/nits', {
     responses: {
       '200': {
         description: 'Array of GenCiudades has many Nits',
@@ -42,10 +39,10 @@ export class GenCiudadesNitsController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<Nits>,
   ): Promise<Nits[]> {
-    return this.genCiudadesRepository.FKCiuNit(id).find(filter);
+    return this.ciudadesRepository.FKCiuNit(id).find(filter);
   }
 
-  @post('/gen-ciudades/{id}/nits', {
+  @post('/ciudades/{id}/nits', {
     responses: {
       '200': {
         description: 'GenCiudades model instance',
@@ -54,7 +51,7 @@ export class GenCiudadesNitsController {
     },
   })
   async create(
-    @param.path.number('id') id: typeof GenCiudades.prototype.IdCiudad,
+    @param.path.number('id') id: typeof Ciudades.prototype.IdCiudad,
     @requestBody({
       content: {
         'application/json': {
@@ -67,10 +64,10 @@ export class GenCiudadesNitsController {
       },
     }) nits: Omit<Nits, 'Nit'>,
   ): Promise<Nits> {
-    return this.genCiudadesRepository.FKCiuNit(id).create(nits);
+    return this.ciudadesRepository.FKCiuNit(id).create(nits);
   }
 
-  @patch('/gen-ciudades/{id}/nits', {
+  @patch('/ciudades/{id}/nits', {
     responses: {
       '200': {
         description: 'GenCiudades.Nits PATCH success count',
@@ -90,10 +87,10 @@ export class GenCiudadesNitsController {
     nits: Partial<Nits>,
     @param.query.object('where', getWhereSchemaFor(Nits)) where?: Where<Nits>,
   ): Promise<Count> {
-    return this.genCiudadesRepository.FKCiuNit(id).patch(nits, where);
+    return this.ciudadesRepository.FKCiuNit(id).patch(nits, where);
   }
 
-  @del('/gen-ciudades/{id}/nits', {
+  @del('/ciudades/{id}/nits', {
     responses: {
       '200': {
         description: 'GenCiudades.Nits DELETE success count',
@@ -105,6 +102,6 @@ export class GenCiudadesNitsController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(Nits)) where?: Where<Nits>,
   ): Promise<Count> {
-    return this.genCiudadesRepository.FKCiuNit(id).delete(where);
+    return this.ciudadesRepository.FKCiuNit(id).delete(where);
   }
 }

@@ -1,22 +1,22 @@
 import {Getter, inject} from '@loopback/core';
 import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {GenCiudades, GenCiudadesRelations, Nits} from '../models';
+import {Ciudades, CiudadesRelations, Nits} from '../models';
 import {NitsRepository} from './nits.repository';
 
-export class GenCiudadesRepository extends DefaultCrudRepository<
-  GenCiudades,
-  typeof GenCiudades.prototype.IdCiudad,
-  GenCiudadesRelations
+export class CiudadesRepository extends DefaultCrudRepository<
+  Ciudades,
+  typeof Ciudades.prototype.IdCiudad,
+  CiudadesRelations
   > {
 
-  public readonly FKCiuNit: HasManyRepositoryFactory<Nits, typeof GenCiudades.prototype.IdCiudad>;
+  public readonly FKCiuNit: HasManyRepositoryFactory<Nits, typeof Ciudades.prototype.IdCiudad>;
 
   constructor(
     @inject('datasources.Postgres') dataSource: PostgresDataSource,
     @repository.getter('NitsRepository') protected nitsRepositoryGetter: Getter<NitsRepository>,
   ) {
-    super(GenCiudades, dataSource);
+    super(Ciudades, dataSource);
     this.FKCiuNit = this.createHasManyRepositoryFactoryFor('FKCiuNit', nitsRepositoryGetter,);
   }
 }

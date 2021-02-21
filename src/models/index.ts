@@ -1,3 +1,4 @@
+export * from './clases.model';
 export * from './clientes.model';
 export * from './comentarios.model';
 export * from './estado-cli.model';
@@ -8,22 +9,22 @@ export * from './foto-inspec.model';
 export * from './gen-ciudades.model';
 export * from './gen-deptos.model';
 export * from './inspecciones.model';
+export * from './marcas.model';
+export * from './nit-inspec.model';
 export * from './nits.model';
 export * from './observaciones.model';
 export * from './preguntas.model';
 export * from './productos.model';
 export * from './revisiones.model';
 export * from './rolles.model';
+export * from './servicios.model';
 export * from './tipo-coment.model';
 export * from './tipo-doc.model';
 export * from './tipo-foto.model';
 export * from './tipo-fuente.model';
 export * from './tnit-inspec.model';
 export * from './usuarios.model';
-export * from './valores-inspec.model';
-export * from './veh-clase.model';
-export * from './veh-marca.model';
-export * from './veh-servicio.model';
+export * from './valor-inspec.model';
 export * from './vehiculos.model';
 
-export * from './nit-inspec.model';
+

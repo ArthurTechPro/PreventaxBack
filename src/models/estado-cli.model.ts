@@ -6,12 +6,20 @@ export class EstadoCli extends Entity {
     type: 'number',
     id: true,
     generated: true,
+    postgresql: {
+      columnName: 'IdEstado',
+      dataType: "Integer",
+    },
   })
-  Id?: number;
+  IdEstado?: number;
 
   @property({
     type: 'string',
     required: true,
+    postgresql: {
+      columnName: 'Descrip',
+      dataType: "Varchar",
+    },
   })
   Descrip: string;
 

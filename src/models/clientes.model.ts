@@ -33,10 +33,10 @@ export class Clientes extends Entity {
   Avatar?: string;
 
   @property({
-    type: 'date',
-    required: true,
+    type: 'Date',
+    defaultFn: "now",
   })
-  FechaCrea: string;
+  FechaCrea?: Date;
 
 
   constructor(data?: Partial<Clientes>) {

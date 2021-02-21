@@ -5,9 +5,9 @@ import {EstadoCli, EstadoCliRelations} from '../models';
 
 export class EstadoCliRepository extends DefaultCrudRepository<
   EstadoCli,
-  typeof EstadoCli.prototype.Id,
+  typeof EstadoCli.prototype.IdEstado,
   EstadoCliRelations
-> {
+  > {
   constructor(
     @inject('datasources.Postgres') dataSource: PostgresDataSource,
   ) {

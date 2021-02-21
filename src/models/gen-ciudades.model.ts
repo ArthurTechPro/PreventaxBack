@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, hasMany, model, property} from '@loopback/repository';
+import {Nits} from './nits.model';
 
 @model()
 export class GenCiudades extends Entity {
@@ -7,15 +8,32 @@ export class GenCiudades extends Entity {
     id: true,
     generated: false,
     required: true,
+    postgresql: {
+      columnName: 'IdCiudad',
+      dataType: "Integer",
+    },
   })
-  Codigo: number;
+  IdCiudad: number;
 
   @property({
     type: 'string',
     required: true,
+    length: 100,
+    postgresql: {
+      columnName: 'Descrip',
+      dataType: "Varchar",
+      length: 100,
+    },
   })
   Descrip: string;
 
+  @property({
+    type: 'number',
+  })
+  IdDepto?: number;
+
+  @hasMany(() => Nits, {keyTo: 'IdCiudad'})
+  FKCiuNit: Nits[];
 
   constructor(data?: Partial<GenCiudades>) {
     super(data);

@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  Vehiculos,
-  Inspecciones,
+  Inspecciones, Vehiculos
 } from '../models';
 import {VehiculosRepository} from '../repositories';
 
@@ -42,7 +41,7 @@ export class VehiculosInspeccionesController {
     @param.path.string('id') id: string,
     @param.query.object('filter') filter?: Filter<Inspecciones>,
   ): Promise<Inspecciones[]> {
-    return this.vehiculosRepository.VehInspec(id).find(filter);
+    return this.vehiculosRepository.FKVehiculoInspec(id).find(filter);
   }
 
   @post('/vehiculos/{id}/inspecciones', {
@@ -67,7 +66,7 @@ export class VehiculosInspeccionesController {
       },
     }) inspecciones: Omit<Inspecciones, 'Id'>,
   ): Promise<Inspecciones> {
-    return this.vehiculosRepository.VehInspec(id).create(inspecciones);
+    return this.vehiculosRepository.FKVehiculoInspec(id).create(inspecciones);
   }
 
   @patch('/vehiculos/{id}/inspecciones', {
@@ -90,7 +89,7 @@ export class VehiculosInspeccionesController {
     inspecciones: Partial<Inspecciones>,
     @param.query.object('where', getWhereSchemaFor(Inspecciones)) where?: Where<Inspecciones>,
   ): Promise<Count> {
-    return this.vehiculosRepository.VehInspec(id).patch(inspecciones, where);
+    return this.vehiculosRepository.FKVehiculoInspec(id).patch(inspecciones, where);
   }
 
   @del('/vehiculos/{id}/inspecciones', {
@@ -105,6 +104,6 @@ export class VehiculosInspeccionesController {
     @param.path.string('id') id: string,
     @param.query.object('where', getWhereSchemaFor(Inspecciones)) where?: Where<Inspecciones>,
   ): Promise<Count> {
-    return this.vehiculosRepository.VehInspec(id).delete(where);
+    return this.vehiculosRepository.FKVehiculoInspec(id).delete(where);
   }
 }

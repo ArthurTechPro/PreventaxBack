@@ -1,9 +1,9 @@
 import {Getter, inject} from '@loopback/core';
 import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {Preguntas, Revisiones, RevisionesRelations, Observaciones} from '../models';
+import {Comentarios, Preguntas, Revisiones, RevisionesRelations} from '../models';
+import {ComentariosRepository} from './comentarios.repository';
 import {PreguntasRepository} from './preguntas.repository';
-import {ObservacionesRepository} from './observaciones.repository';
 
 export class RevisionesRepository extends DefaultCrudRepository<
   Revisiones,
@@ -11,18 +11,17 @@ export class RevisionesRepository extends DefaultCrudRepository<
   RevisionesRelations
   > {
 
-  public readonly RevPre: HasManyRepositoryFactory<Preguntas, typeof Revisiones.prototype.Id>;
+  public readonly FKRevisionComet: HasManyRepositoryFactory<Comentarios, typeof Revisiones.prototype.Id>;
 
-  public readonly RevisionObs: HasManyRepositoryFactory<Observaciones, typeof Revisiones.prototype.Id>;
+  public readonly FKRevisPregunta: HasManyRepositoryFactory<Preguntas, typeof Revisiones.prototype.Id>;
 
   constructor(
-    @inject('datasources.Postgres') dataSource: PostgresDataSource,
-    @repository.getter('PreguntasRepository') protected preguntasRepositoryGetter: Getter<PreguntasRepository>, @repository.getter('ObservacionesRepository') protected observacionesRepositoryGetter: Getter<ObservacionesRepository>,
+    @inject('datasources.Postgres') dataSource: PostgresDataSource, @repository.getter('ComentariosRepository') protected comentariosRepositoryGetter: Getter<ComentariosRepository>, @repository.getter('PreguntasRepository') protected preguntasRepositoryGetter: Getter<PreguntasRepository>,
   ) {
     super(Revisiones, dataSource);
-    this.RevisionObs = this.createHasManyRepositoryFactoryFor('RevisionObs', observacionesRepositoryGetter,);
-    this.registerInclusionResolver('RevisionObs', this.RevisionObs.inclusionResolver);
-    this.RevPre = this.createHasManyRepositoryFactoryFor('RevPre', preguntasRepositoryGetter,);
-    this.registerInclusionResolver('RevPre', this.RevPre.inclusionResolver);
+    this.FKRevisPregunta = this.createHasManyRepositoryFactoryFor('FKRevisPregunta', preguntasRepositoryGetter,);
+    this.registerInclusionResolver('FKRevisPregunta', this.FKRevisPregunta.inclusionResolver);
+    this.FKRevisionComet = this.createHasManyRepositoryFactoryFor('FKRevisionComet', comentariosRepositoryGetter,);
+    this.registerInclusionResolver('FKRevisionComet', this.FKRevisionComet.inclusionResolver);
   }
 }

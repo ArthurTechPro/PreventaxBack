@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  TipoComent,
-  Comentarios,
+  Comentarios, TipoComent
 } from '../models';
 import {TipoComentRepository} from '../repositories';
 
@@ -42,7 +41,7 @@ export class TipoComentComentariosController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<Comentarios>,
   ): Promise<Comentarios[]> {
-    return this.tipoComentRepository.TipComent(id).find(filter);
+    return this.tipoComentRepository.FKTipComet(id).find(filter);
   }
 
   @post('/tipo-coments/{id}/comentarios', {
@@ -61,13 +60,13 @@ export class TipoComentComentariosController {
           schema: getModelSchemaRef(Comentarios, {
             title: 'NewComentariosInTipoComent',
             exclude: ['Id'],
-            optional: ['IdTipo']
+            optional: ['IdTipoComent']
           }),
         },
       },
     }) comentarios: Omit<Comentarios, 'Id'>,
   ): Promise<Comentarios> {
-    return this.tipoComentRepository.TipComent(id).create(comentarios);
+    return this.tipoComentRepository.FKTipComet(id).create(comentarios);
   }
 
   @patch('/tipo-coments/{id}/comentarios', {
@@ -90,7 +89,7 @@ export class TipoComentComentariosController {
     comentarios: Partial<Comentarios>,
     @param.query.object('where', getWhereSchemaFor(Comentarios)) where?: Where<Comentarios>,
   ): Promise<Count> {
-    return this.tipoComentRepository.TipComent(id).patch(comentarios, where);
+    return this.tipoComentRepository.FKTipComet(id).patch(comentarios, where);
   }
 
   @del('/tipo-coments/{id}/comentarios', {
@@ -105,6 +104,6 @@ export class TipoComentComentariosController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(Comentarios)) where?: Where<Comentarios>,
   ): Promise<Count> {
-    return this.tipoComentRepository.TipComent(id).delete(where);
+    return this.tipoComentRepository.FKTipComet(id).delete(where);
   }
 }

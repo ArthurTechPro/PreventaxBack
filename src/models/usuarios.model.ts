@@ -1,5 +1,6 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
+import {belongsTo, Entity, hasMany, model, property} from '@loopback/repository';
 import {Inspecciones} from './inspecciones.model';
+import {Nits} from './nits.model';
 
 @model()
 export class Usuarios extends Entity {
@@ -7,61 +8,102 @@ export class Usuarios extends Entity {
     type: 'number',
     id: true,
     generated: true,
+    postgresql: {
+      columnName: 'IdUsuario',
+      dataType: "Integer",
+    },
   })
-  Id?: number;
+  IdUsuario?: number;
 
   @property({
     type: 'string',
     required: true,
+    length: 20,
+    postgresql: {
+      columnName: 'Usuario',
+      dataType: "Varchar",
+      datalength: 20,
+    },
   })
   Usuario: string;
 
   @property({
     type: 'string',
     required: true,
+    length: 100,
+    postgresql: {
+      columnName: 'Email',
+      dataType: "Varchar",
+      datalength: 100,
+    },
   })
   Email: string;
 
   @property({
     type: 'string',
     required: true,
+    postgresql: {
+      length: 100,
+      columnName: 'Passsword',
+      dataType: "Varchar",
+      dayalength: 100,
+    },
   })
   Passsword: string;
 
   @property({
     type: 'boolean',
     required: true,
+    postgresql: {
+      columnName: 'IsAdmin',
+      dataType: "Boolean",
+    },
   })
   IsAdmin: boolean;
 
   @property({
     type: 'string',
+    length: 100,
+    postgresql: {
+      columnName: 'Avatar',
+      dataType: "Varchar",
+      datalength: 100,
+    },
   })
   Avatar?: string;
 
   @property({
     type: 'date',
-    required: true,
+    defaultFn: "now",
+    postgresql: {
+      columnName: 'FechaCrea',
+    },
   })
-  FechaCrea: string;
+  FechaCrea?: Date;
 
   @property({
     type: 'number',
+    postgresql: {
+      columnName: 'IdEstadoUsu',
+      dataType: "Integer",
+    },
   })
-  IdEstado?: number;
+  IdEstadoUsu?: number;
 
   @property({
     type: 'number',
+    postgresql: {
+      columnName: 'IdRoll',
+      dataType: "Integer",
+    },
   })
   IdRoll?: number;
 
-  @property({
-    type: 'number',
-  })
-  IdNit?: number;
+  @belongsTo(() => Nits, {name: 'btUsuNit'})
+  IdNit: number;
 
   @hasMany(() => Inspecciones, {keyTo: 'IdUsuario'})
-  UsrInspec: Inspecciones[];
+  FKUsuInspec: Inspecciones[];
 
   constructor(data?: Partial<Usuarios>) {
     super(data);

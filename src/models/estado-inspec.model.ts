@@ -1,4 +1,4 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 import {Inspecciones} from './inspecciones.model';
 
 @model()
@@ -7,17 +7,27 @@ export class EstadoInspec extends Entity {
     type: 'number',
     id: true,
     generated: true,
+    postgresql: {
+      columnName: 'Id',
+      dataType: "Integer",
+    },
   })
   Id?: number;
 
   @property({
     type: 'string',
     required: true,
+    length: 50,
+    postgresql: {
+      columnName: 'Descrip',
+      dataType: "Varchar",
+      datalength: 50,
+    },
   })
   Descrip: string;
 
-  @hasMany(() => Inspecciones, {keyTo: 'IdEstado'})
-  EstInspec: Inspecciones[];
+  @hasMany(() => Inspecciones, {keyTo: 'IdEstadoInspec'})
+  FKEstadoInspec: Inspecciones[];
 
   constructor(data?: Partial<EstadoInspec>) {
     super(data);

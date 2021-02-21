@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,11 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   Productos,
-  Revisiones,
+  Revisiones
 } from '../models';
 import {ProductosRepository} from '../repositories';
 
@@ -42,7 +42,7 @@ export class ProductosRevisionesController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<Revisiones>,
   ): Promise<Revisiones[]> {
-    return this.productosRepository.ProdRev(id).find(filter);
+    return this.productosRepository.FKProductoRevision(id).find(filter);
   }
 
   @post('/productos/{id}/revisiones', {
@@ -61,13 +61,13 @@ export class ProductosRevisionesController {
           schema: getModelSchemaRef(Revisiones, {
             title: 'NewRevisionesInProductos',
             exclude: ['Id'],
-            optional: ['IdProduc']
+            optional: ['IdProducto']
           }),
         },
       },
     }) revisiones: Omit<Revisiones, 'Id'>,
   ): Promise<Revisiones> {
-    return this.productosRepository.ProdRev(id).create(revisiones);
+    return this.productosRepository.FKProductoRevision(id).create(revisiones);
   }
 
   @patch('/productos/{id}/revisiones', {
@@ -90,7 +90,7 @@ export class ProductosRevisionesController {
     revisiones: Partial<Revisiones>,
     @param.query.object('where', getWhereSchemaFor(Revisiones)) where?: Where<Revisiones>,
   ): Promise<Count> {
-    return this.productosRepository.ProdRev(id).patch(revisiones, where);
+    return this.productosRepository.FKProductoRevision(id).patch(revisiones, where);
   }
 
   @del('/productos/{id}/revisiones', {
@@ -105,6 +105,6 @@ export class ProductosRevisionesController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(Revisiones)) where?: Where<Revisiones>,
   ): Promise<Count> {
-    return this.productosRepository.ProdRev(id).delete(where);
+    return this.productosRepository.FKProductoRevision(id).delete(where);
   }
 }

@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  Usuarios,
-  Inspecciones,
+  Inspecciones, Usuarios
 } from '../models';
 import {UsuariosRepository} from '../repositories';
 
@@ -42,7 +41,7 @@ export class UsuariosInspeccionesController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<Inspecciones>,
   ): Promise<Inspecciones[]> {
-    return this.usuariosRepository.UsrInspec(id).find(filter);
+    return this.usuariosRepository.FKUsuInspec(id).find(filter);
   }
 
   @post('/usuarios/{id}/inspecciones', {
@@ -54,7 +53,7 @@ export class UsuariosInspeccionesController {
     },
   })
   async create(
-    @param.path.number('id') id: typeof Usuarios.prototype.Id,
+    @param.path.number('id') id: typeof Usuarios.prototype.IdUsuario,
     @requestBody({
       content: {
         'application/json': {
@@ -67,7 +66,7 @@ export class UsuariosInspeccionesController {
       },
     }) inspecciones: Omit<Inspecciones, 'Id'>,
   ): Promise<Inspecciones> {
-    return this.usuariosRepository.UsrInspec(id).create(inspecciones);
+    return this.usuariosRepository.FKUsuInspec(id).create(inspecciones);
   }
 
   @patch('/usuarios/{id}/inspecciones', {
@@ -90,7 +89,7 @@ export class UsuariosInspeccionesController {
     inspecciones: Partial<Inspecciones>,
     @param.query.object('where', getWhereSchemaFor(Inspecciones)) where?: Where<Inspecciones>,
   ): Promise<Count> {
-    return this.usuariosRepository.UsrInspec(id).patch(inspecciones, where);
+    return this.usuariosRepository.FKUsuInspec(id).patch(inspecciones, where);
   }
 
   @del('/usuarios/{id}/inspecciones', {
@@ -105,6 +104,6 @@ export class UsuariosInspeccionesController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(Inspecciones)) where?: Where<Inspecciones>,
   ): Promise<Count> {
-    return this.usuariosRepository.UsrInspec(id).delete(where);
+    return this.usuariosRepository.FKUsuInspec(id).delete(where);
   }
 }

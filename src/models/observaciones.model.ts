@@ -6,23 +6,32 @@ export class Observaciones extends Entity {
     type: 'number',
     id: true,
     generated: true,
+    postgresql: {
+      columnName: 'Id',
+      dataType: "Integer",
+    },
   })
   Id?: number;
 
   @property({
     type: 'number',
+    postgresql: {
+      columnName: 'TipoObs',
+      dataType: "Integer",
+    },
   })
   TipoObs?: number;
 
   @property({
     type: 'string',
+    length: 255,
+    postgresql: {
+      columnName: 'Descrip',
+      dataType: "Varchar",
+      datalength: 255,
+    },
   })
   Descrip?: string;
-
-  @property({
-    type: 'number',
-  })
-  IdPregunta?: number;
 
   @property({
     type: 'number',
@@ -32,7 +41,7 @@ export class Observaciones extends Entity {
   @property({
     type: 'number',
   })
-  IdRevision?: number;
+  IdPregunta?: number;
 
   constructor(data?: Partial<Observaciones>) {
     super(data);

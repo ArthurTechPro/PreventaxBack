@@ -42,7 +42,7 @@ export class InspeccionesObservacionesController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<Observaciones>,
   ): Promise<Observaciones[]> {
-    return this.inspeccionesRepository.InspecObs(id).find(filter);
+    return this.inspeccionesRepository.FKInspecObserva(id).find(filter);
   }
 
   @post('/inspecciones/{id}/observaciones', {
@@ -67,7 +67,7 @@ export class InspeccionesObservacionesController {
       },
     }) observaciones: Omit<Observaciones, 'Id'>,
   ): Promise<Observaciones> {
-    return this.inspeccionesRepository.InspecObs(id).create(observaciones);
+    return this.inspeccionesRepository.FKInspecObserva(id).create(observaciones);
   }
 
   @patch('/inspecciones/{id}/observaciones', {
@@ -90,7 +90,7 @@ export class InspeccionesObservacionesController {
     observaciones: Partial<Observaciones>,
     @param.query.object('where', getWhereSchemaFor(Observaciones)) where?: Where<Observaciones>,
   ): Promise<Count> {
-    return this.inspeccionesRepository.InspecObs(id).patch(observaciones, where);
+    return this.inspeccionesRepository.FKInspecObserva(id).patch(observaciones, where);
   }
 
   @del('/inspecciones/{id}/observaciones', {
@@ -105,6 +105,6 @@ export class InspeccionesObservacionesController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(Observaciones)) where?: Where<Observaciones>,
   ): Promise<Count> {
-    return this.inspeccionesRepository.InspecObs(id).delete(where);
+    return this.inspeccionesRepository.FKInspecObserva(id).delete(where);
   }
 }

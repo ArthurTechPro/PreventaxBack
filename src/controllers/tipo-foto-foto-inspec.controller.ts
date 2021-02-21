@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  TipoFoto,
-  FotoInspec,
+  FotoInspec, TipoFoto
 } from '../models';
 import {TipoFotoRepository} from '../repositories';
 
@@ -42,7 +41,7 @@ export class TipoFotoFotoInspecController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<FotoInspec>,
   ): Promise<FotoInspec[]> {
-    return this.tipoFotoRepository.TipoFotoI(id).find(filter);
+    return this.tipoFotoRepository.FKTipoFotoInspec(id).find(filter);
   }
 
   @post('/tipo-fotos/{id}/foto-inspecs', {
@@ -61,13 +60,13 @@ export class TipoFotoFotoInspecController {
           schema: getModelSchemaRef(FotoInspec, {
             title: 'NewFotoInspecInTipoFoto',
             exclude: ['Id'],
-            optional: ['IdTipo']
+            optional: ['IdTipoFoto']
           }),
         },
       },
     }) fotoInspec: Omit<FotoInspec, 'Id'>,
   ): Promise<FotoInspec> {
-    return this.tipoFotoRepository.TipoFotoI(id).create(fotoInspec);
+    return this.tipoFotoRepository.FKTipoFotoInspec(id).create(fotoInspec);
   }
 
   @patch('/tipo-fotos/{id}/foto-inspecs', {
@@ -90,7 +89,7 @@ export class TipoFotoFotoInspecController {
     fotoInspec: Partial<FotoInspec>,
     @param.query.object('where', getWhereSchemaFor(FotoInspec)) where?: Where<FotoInspec>,
   ): Promise<Count> {
-    return this.tipoFotoRepository.TipoFotoI(id).patch(fotoInspec, where);
+    return this.tipoFotoRepository.FKTipoFotoInspec(id).patch(fotoInspec, where);
   }
 
   @del('/tipo-fotos/{id}/foto-inspecs', {
@@ -105,6 +104,6 @@ export class TipoFotoFotoInspecController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(FotoInspec)) where?: Where<FotoInspec>,
   ): Promise<Count> {
-    return this.tipoFotoRepository.TipoFotoI(id).delete(where);
+    return this.tipoFotoRepository.FKTipoFotoInspec(id).delete(where);
   }
 }

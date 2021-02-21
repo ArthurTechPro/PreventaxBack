@@ -1,5 +1,4 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Usuarios} from './usuarios.model';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 
 @model()
 export class EstadoUsu extends Entity {
@@ -7,17 +6,27 @@ export class EstadoUsu extends Entity {
     type: 'number',
     id: true,
     generated: true,
+    postgresql: {
+      columnName: 'IdEstadoUsu',
+      dataType: "Integer",
+    },
   })
-  Id?: number;
+  IdEstado?: number;
 
   @property({
     type: 'string',
     required: true,
+
+    postgresql: {
+      columnName: 'Descrip',
+      dataType: "Varchar",
+      length: 50,
+    },
   })
   Descrip: string;
 
-  @hasMany(() => Usuarios, {keyTo: 'IdEstado'})
-  EstUsu: Usuarios[];
+  @hasMany(() => Usuarios, {keyTo: 'IdEstadoUsu'})
+  FKEstadoUsu: Usuarios[];
 
   constructor(data?: Partial<EstadoUsu>) {
     super(data);

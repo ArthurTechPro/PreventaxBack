@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,11 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   EstadoUsu,
-  Usuarios,
+  Usuarios
 } from '../models';
 import {EstadoUsuRepository} from '../repositories';
 
@@ -42,7 +42,7 @@ export class EstadoUsuUsuariosController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<Usuarios>,
   ): Promise<Usuarios[]> {
-    return this.estadoUsuRepository.EstUsu(id).find(filter);
+    return this.estadoUsuRepository.FKEstadoUsu(id).find(filter);
   }
 
   @post('/estado-usus/{id}/usuarios', {
@@ -54,20 +54,20 @@ export class EstadoUsuUsuariosController {
     },
   })
   async create(
-    @param.path.number('id') id: typeof EstadoUsu.prototype.Id,
+    @param.path.number('id') id: typeof EstadoUsu.prototype.IdEstado,
     @requestBody({
       content: {
         'application/json': {
           schema: getModelSchemaRef(Usuarios, {
             title: 'NewUsuariosInEstadoUsu',
-            exclude: ['Id'],
-            optional: ['IdEstado']
+            exclude: ['IdUsuario'],
+            optional: ['IdEstadoUsu']
           }),
         },
       },
-    }) usuarios: Omit<Usuarios, 'Id'>,
+    }) usuarios: Omit<Usuarios, 'IdUsuario'>,
   ): Promise<Usuarios> {
-    return this.estadoUsuRepository.EstUsu(id).create(usuarios);
+    return this.estadoUsuRepository.FKEstadoUsu(id).create(usuarios);
   }
 
   @patch('/estado-usus/{id}/usuarios', {
@@ -90,7 +90,7 @@ export class EstadoUsuUsuariosController {
     usuarios: Partial<Usuarios>,
     @param.query.object('where', getWhereSchemaFor(Usuarios)) where?: Where<Usuarios>,
   ): Promise<Count> {
-    return this.estadoUsuRepository.EstUsu(id).patch(usuarios, where);
+    return this.estadoUsuRepository.FKEstadoUsu(id).patch(usuarios, where);
   }
 
   @del('/estado-usus/{id}/usuarios', {
@@ -105,6 +105,6 @@ export class EstadoUsuUsuariosController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(Usuarios)) where?: Where<Usuarios>,
   ): Promise<Count> {
-    return this.estadoUsuRepository.EstUsu(id).delete(where);
+    return this.estadoUsuRepository.FKEstadoUsu(id).delete(where);
   }
 }

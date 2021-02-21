@@ -1,5 +1,5 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {ValoresInspec} from './valores-inspec.model';
+import {Entity, hasMany, model, property} from '@loopback/repository';
+import {ValorInspec} from './valor-inspec.model';
 
 @model()
 export class TipoFuente extends Entity {
@@ -7,17 +7,27 @@ export class TipoFuente extends Entity {
     type: 'number',
     id: true,
     generated: true,
+    postgresql: {
+      columnName: 'Id',
+      dataType: "Integer",
+    },
   })
   Id?: number;
 
   @property({
     type: 'string',
     required: true,
+    length: 50,
+    postgresql: {
+      columnName: 'Descrip',
+      dataType: "Varchar",
+      datalength: 50,
+    },
   })
   Descrip: string;
 
-  @hasMany(() => ValoresInspec, {keyTo: 'IdTipo'})
-  TipoVal: ValoresInspec[];
+  @hasMany(() => ValorInspec, {keyTo: 'IdTipoFuente'})
+  FKTipoFuenteValor: ValorInspec[];
 
   constructor(data?: Partial<TipoFuente>) {
     super(data);

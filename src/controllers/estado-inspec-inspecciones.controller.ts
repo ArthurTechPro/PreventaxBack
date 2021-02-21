@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,11 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   EstadoInspec,
-  Inspecciones,
+  Inspecciones
 } from '../models';
 import {EstadoInspecRepository} from '../repositories';
 
@@ -42,7 +42,7 @@ export class EstadoInspecInspeccionesController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<Inspecciones>,
   ): Promise<Inspecciones[]> {
-    return this.estadoInspecRepository.EstInspec(id).find(filter);
+    return this.estadoInspecRepository.FKEstadoInspec(id).find(filter);
   }
 
   @post('/estado-inspecs/{id}/inspecciones', {
@@ -61,13 +61,13 @@ export class EstadoInspecInspeccionesController {
           schema: getModelSchemaRef(Inspecciones, {
             title: 'NewInspeccionesInEstadoInspec',
             exclude: ['Id'],
-            optional: ['IdEstado']
+            optional: ['IdEstadoInspec']
           }),
         },
       },
     }) inspecciones: Omit<Inspecciones, 'Id'>,
   ): Promise<Inspecciones> {
-    return this.estadoInspecRepository.EstInspec(id).create(inspecciones);
+    return this.estadoInspecRepository.FKEstadoInspec(id).create(inspecciones);
   }
 
   @patch('/estado-inspecs/{id}/inspecciones', {
@@ -90,7 +90,7 @@ export class EstadoInspecInspeccionesController {
     inspecciones: Partial<Inspecciones>,
     @param.query.object('where', getWhereSchemaFor(Inspecciones)) where?: Where<Inspecciones>,
   ): Promise<Count> {
-    return this.estadoInspecRepository.EstInspec(id).patch(inspecciones, where);
+    return this.estadoInspecRepository.FKEstadoInspec(id).patch(inspecciones, where);
   }
 
   @del('/estado-inspecs/{id}/inspecciones', {
@@ -105,6 +105,6 @@ export class EstadoInspecInspeccionesController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(Inspecciones)) where?: Where<Inspecciones>,
   ): Promise<Count> {
-    return this.estadoInspecRepository.EstInspec(id).delete(where);
+    return this.estadoInspecRepository.FKEstadoInspec(id).delete(where);
   }
 }

@@ -4,18 +4,22 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {TipoDoc} from '../models';
 import {TipoDocRepository} from '../repositories';
@@ -23,8 +27,8 @@ import {TipoDocRepository} from '../repositories';
 export class TipoDocController {
   constructor(
     @repository(TipoDocRepository)
-    public tipoDocRepository : TipoDocRepository,
-  ) {}
+    public tipoDocRepository: TipoDocRepository,
+  ) { }
 
   @post('/tipo-docs')
   @response(200, {

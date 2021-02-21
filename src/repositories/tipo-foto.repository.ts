@@ -1,21 +1,21 @@
-import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
+import {Getter, inject} from '@loopback/core';
+import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {TipoFoto, TipoFotoRelations, FotoInspec} from '../models';
+import {FotoInspec, TipoFoto, TipoFotoRelations} from '../models';
 import {FotoInspecRepository} from './foto-inspec.repository';
 
 export class TipoFotoRepository extends DefaultCrudRepository<
   TipoFoto,
   typeof TipoFoto.prototype.Id,
   TipoFotoRelations
-> {
+  > {
 
-  public readonly TipoFotoI: HasManyRepositoryFactory<FotoInspec, typeof TipoFoto.prototype.Id>;
+  public readonly FKTipoFotoInspec: HasManyRepositoryFactory<FotoInspec, typeof TipoFoto.prototype.Id>;
 
   constructor(
     @inject('datasources.Postgres') dataSource: PostgresDataSource, @repository.getter('FotoInspecRepository') protected fotoInspecRepositoryGetter: Getter<FotoInspecRepository>,
   ) {
     super(TipoFoto, dataSource);
-    this.TipoFotoI = this.createHasManyRepositoryFactoryFor('TipoFotoI', fotoInspecRepositoryGetter,);
+    this.FKTipoFotoInspec = this.createHasManyRepositoryFactoryFor('FKTipoFotoInspec', fotoInspecRepositoryGetter,);
   }
 }

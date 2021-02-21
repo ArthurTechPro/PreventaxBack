@@ -1,22 +1,27 @@
-import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
+import {Getter, inject} from '@loopback/core';
+import {BelongsToAccessor, DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {Usuarios, UsuariosRelations, Inspecciones} from '../models';
+import {Inspecciones, Nits, Usuarios, UsuariosRelations} from '../models';
 import {InspeccionesRepository} from './inspecciones.repository';
+import {NitsRepository} from './nits.repository';
 
 export class UsuariosRepository extends DefaultCrudRepository<
   Usuarios,
-  typeof Usuarios.prototype.Id,
+  typeof Usuarios.prototype.IdUsuario,
   UsuariosRelations
-> {
+  > {
 
-  public readonly UsrInspec: HasManyRepositoryFactory<Inspecciones, typeof Usuarios.prototype.Id>;
+  public readonly btUsuNit: BelongsToAccessor<Nits, typeof Usuarios.prototype.IdUsuario>;
+
+  public readonly FKUsuInspec: HasManyRepositoryFactory<Inspecciones, typeof Usuarios.prototype.IdUsuario>;
 
   constructor(
-    @inject('datasources.Postgres') dataSource: PostgresDataSource, @repository.getter('InspeccionesRepository') protected inspeccionesRepositoryGetter: Getter<InspeccionesRepository>,
+    @inject('datasources.Postgres') dataSource: PostgresDataSource, @repository.getter('NitsRepository') protected nitsRepositoryGetter: Getter<NitsRepository>, @repository.getter('InspeccionesRepository') protected inspeccionesRepositoryGetter: Getter<InspeccionesRepository>,
   ) {
     super(Usuarios, dataSource);
-    this.UsrInspec = this.createHasManyRepositoryFactoryFor('UsrInspec', inspeccionesRepositoryGetter,);
-    this.registerInclusionResolver('UsrInspec', this.UsrInspec.inclusionResolver);
+    this.FKUsuInspec = this.createHasManyRepositoryFactoryFor('FKUsuInspec', inspeccionesRepositoryGetter,);
+    this.registerInclusionResolver('FKUsuInspec', this.FKUsuInspec.inclusionResolver);
+    this.btUsuNit = this.createBelongsToAccessorFor('btUsuNit', nitsRepositoryGetter,);
+    this.registerInclusionResolver('btUsuNit', this.btUsuNit.inclusionResolver);
   }
 }

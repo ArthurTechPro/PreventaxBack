@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,11 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   Inspecciones,
-  NitInspec,
+  NitInspec
 } from '../models';
 import {InspeccionesRepository} from '../repositories';
 
@@ -42,7 +42,7 @@ export class InspeccionesNitInspecController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<NitInspec>,
   ): Promise<NitInspec[]> {
-    return this.inspeccionesRepository.InspecNit(id).find(filter);
+    return this.inspeccionesRepository.FKInpecNits(id).find(filter);
   }
 
   @post('/inspecciones/{id}/nit-inspecs', {
@@ -61,13 +61,13 @@ export class InspeccionesNitInspecController {
           schema: getModelSchemaRef(NitInspec, {
             title: 'NewNitInspecInInspecciones',
             exclude: ['Id'],
-            optional: ['IdInspec']
+            optional: ['IdInspeccion']
           }),
         },
       },
     }) nitInspec: Omit<NitInspec, 'Id'>,
   ): Promise<NitInspec> {
-    return this.inspeccionesRepository.InspecNit(id).create(nitInspec);
+    return this.inspeccionesRepository.FKInpecNits(id).create(nitInspec);
   }
 
   @patch('/inspecciones/{id}/nit-inspecs', {
@@ -90,7 +90,7 @@ export class InspeccionesNitInspecController {
     nitInspec: Partial<NitInspec>,
     @param.query.object('where', getWhereSchemaFor(NitInspec)) where?: Where<NitInspec>,
   ): Promise<Count> {
-    return this.inspeccionesRepository.InspecNit(id).patch(nitInspec, where);
+    return this.inspeccionesRepository.FKInpecNits(id).patch(nitInspec, where);
   }
 
   @del('/inspecciones/{id}/nit-inspecs', {
@@ -105,6 +105,6 @@ export class InspeccionesNitInspecController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(NitInspec)) where?: Where<NitInspec>,
   ): Promise<Count> {
-    return this.inspeccionesRepository.InspecNit(id).delete(where);
+    return this.inspeccionesRepository.FKInpecNits(id).delete(where);
   }
 }

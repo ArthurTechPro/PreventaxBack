@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  TipoDoc,
-  Nits,
+  Nits, TipoDoc
 } from '../models';
 import {TipoDocRepository} from '../repositories';
 
@@ -42,7 +41,7 @@ export class TipoDocNitsController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<Nits>,
   ): Promise<Nits[]> {
-    return this.tipoDocRepository.TipDNit(id).find(filter);
+    return this.tipoDocRepository.FKTipoDocNIt(id).find(filter);
   }
 
   @post('/tipo-docs/{id}/nits', {
@@ -67,7 +66,7 @@ export class TipoDocNitsController {
       },
     }) nits: Omit<Nits, 'Nit'>,
   ): Promise<Nits> {
-    return this.tipoDocRepository.TipDNit(id).create(nits);
+    return this.tipoDocRepository.FKTipoDocNIt(id).create(nits);
   }
 
   @patch('/tipo-docs/{id}/nits', {
@@ -90,7 +89,7 @@ export class TipoDocNitsController {
     nits: Partial<Nits>,
     @param.query.object('where', getWhereSchemaFor(Nits)) where?: Where<Nits>,
   ): Promise<Count> {
-    return this.tipoDocRepository.TipDNit(id).patch(nits, where);
+    return this.tipoDocRepository.FKTipoDocNIt(id).patch(nits, where);
   }
 
   @del('/tipo-docs/{id}/nits', {
@@ -105,6 +104,6 @@ export class TipoDocNitsController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(Nits)) where?: Where<Nits>,
   ): Promise<Count> {
-    return this.tipoDocRepository.TipDNit(id).delete(where);
+    return this.tipoDocRepository.FKTipoDocNIt(id).delete(where);
   }
 }

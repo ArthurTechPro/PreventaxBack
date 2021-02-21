@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  Revisiones,
-  Preguntas,
+  Preguntas, Revisiones
 } from '../models';
 import {RevisionesRepository} from '../repositories';
 
@@ -42,7 +41,7 @@ export class RevisionesPreguntasController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<Preguntas>,
   ): Promise<Preguntas[]> {
-    return this.revisionesRepository.RevPre(id).find(filter);
+    return this.revisionesRepository.FKRevisPregunta(id).find(filter);
   }
 
   @post('/revisiones/{id}/preguntas', {
@@ -67,7 +66,7 @@ export class RevisionesPreguntasController {
       },
     }) preguntas: Omit<Preguntas, 'Id'>,
   ): Promise<Preguntas> {
-    return this.revisionesRepository.RevPre(id).create(preguntas);
+    return this.revisionesRepository.FKRevisPregunta(id).create(preguntas);
   }
 
   @patch('/revisiones/{id}/preguntas', {
@@ -90,7 +89,7 @@ export class RevisionesPreguntasController {
     preguntas: Partial<Preguntas>,
     @param.query.object('where', getWhereSchemaFor(Preguntas)) where?: Where<Preguntas>,
   ): Promise<Count> {
-    return this.revisionesRepository.RevPre(id).patch(preguntas, where);
+    return this.revisionesRepository.FKRevisPregunta(id).patch(preguntas, where);
   }
 
   @del('/revisiones/{id}/preguntas', {
@@ -105,6 +104,6 @@ export class RevisionesPreguntasController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(Preguntas)) where?: Where<Preguntas>,
   ): Promise<Count> {
-    return this.revisionesRepository.RevPre(id).delete(where);
+    return this.revisionesRepository.FKRevisPregunta(id).delete(where);
   }
 }

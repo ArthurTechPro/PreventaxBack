@@ -6,6 +6,10 @@ export class NitInspec extends Entity {
     type: 'number',
     id: true,
     generated: true,
+    postgresql: {
+      columnName: 'Id',
+      dataType: "Integer",
+    },
   })
   Id?: number;
 
@@ -22,7 +26,7 @@ export class NitInspec extends Entity {
   @property({
     type: 'number',
   })
-  IdInspec?: number;
+  IdInspeccion?: number;
 
   constructor(data?: Partial<NitInspec>) {
     super(data);

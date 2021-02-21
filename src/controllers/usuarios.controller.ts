@@ -4,18 +4,22 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {Usuarios} from '../models';
 import {UsuariosRepository} from '../repositories';
@@ -23,8 +27,8 @@ import {UsuariosRepository} from '../repositories';
 export class UsuariosController {
   constructor(
     @repository(UsuariosRepository)
-    public usuariosRepository : UsuariosRepository,
-  ) {}
+    public usuariosRepository: UsuariosRepository,
+  ) { }
 
   @post('/usuarios')
   @response(200, {
@@ -37,12 +41,12 @@ export class UsuariosController {
         'application/json': {
           schema: getModelSchemaRef(Usuarios, {
             title: 'NewUsuarios',
-            exclude: ['Id'],
+            exclude: ['IdUsuario'],
           }),
         },
       },
     })
-    usuarios: Omit<Usuarios, 'Id'>,
+    usuarios: Omit<Usuarios, 'IdUsuario'>,
   ): Promise<Usuarios> {
     return this.usuariosRepository.create(usuarios);
   }

@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  Productos,
-  Inspecciones,
+  Inspecciones, Productos
 } from '../models';
 import {ProductosRepository} from '../repositories';
 
@@ -42,7 +41,7 @@ export class ProductosInspeccionesController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<Inspecciones>,
   ): Promise<Inspecciones[]> {
-    return this.productosRepository.ProdInspec(id).find(filter);
+    return this.productosRepository.FKProducInspec(id).find(filter);
   }
 
   @post('/productos/{id}/inspecciones', {
@@ -61,13 +60,13 @@ export class ProductosInspeccionesController {
           schema: getModelSchemaRef(Inspecciones, {
             title: 'NewInspeccionesInProductos',
             exclude: ['Id'],
-            optional: ['IdProduc']
+            optional: ['IdProducto']
           }),
         },
       },
     }) inspecciones: Omit<Inspecciones, 'Id'>,
   ): Promise<Inspecciones> {
-    return this.productosRepository.ProdInspec(id).create(inspecciones);
+    return this.productosRepository.FKProducInspec(id).create(inspecciones);
   }
 
   @patch('/productos/{id}/inspecciones', {
@@ -90,7 +89,7 @@ export class ProductosInspeccionesController {
     inspecciones: Partial<Inspecciones>,
     @param.query.object('where', getWhereSchemaFor(Inspecciones)) where?: Where<Inspecciones>,
   ): Promise<Count> {
-    return this.productosRepository.ProdInspec(id).patch(inspecciones, where);
+    return this.productosRepository.FKProducInspec(id).patch(inspecciones, where);
   }
 
   @del('/productos/{id}/inspecciones', {
@@ -105,6 +104,6 @@ export class ProductosInspeccionesController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(Inspecciones)) where?: Where<Inspecciones>,
   ): Promise<Count> {
-    return this.productosRepository.ProdInspec(id).delete(where);
+    return this.productosRepository.FKProducInspec(id).delete(where);
   }
 }

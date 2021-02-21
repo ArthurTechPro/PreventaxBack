@@ -38,10 +38,10 @@ export class Clientes extends Entity {
   Avatar?: string;
 
   @property({
-    type: 'date',
+    type: 'Date',
     defaultFn: "now",
   })
-  FechaCrea?: string;
+  FechaCrea?: Date;
 
   @property({
     type: 'number',

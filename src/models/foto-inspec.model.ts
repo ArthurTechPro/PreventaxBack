@@ -6,28 +6,38 @@ export class FotoInspec extends Entity {
     type: 'number',
     id: true,
     generated: true,
+    postgresql: {
+      columnName: 'Id',
+      dataType: "Integer",
+    },
   })
   Id?: number;
 
   @property({
     type: 'string',
+    length: 50,
+    postgresql: {
+      columnName: 'Url',
+      dataType: "Varchar",
+      datalength: 50,
+    },
   })
   Url?: string;
 
   @property({
     type: 'number',
   })
-  IdTipo?: number;
-
-  @property({
-    type: 'number',
-  })
-  IdPregunta?: number;
+  IdTipoFoto?: number;
 
   @property({
     type: 'number',
   })
   IdInspec?: number;
+
+  @property({
+    type: 'number',
+  })
+  IdPregunta?: number;
 
   constructor(data?: Partial<FotoInspec>) {
     super(data);

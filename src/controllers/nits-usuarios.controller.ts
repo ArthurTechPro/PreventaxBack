@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,11 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   Nits,
-  Usuarios,
+  Usuarios
 } from '../models';
 import {NitsRepository} from '../repositories';
 
@@ -42,7 +42,7 @@ export class NitsUsuariosController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<Usuarios>,
   ): Promise<Usuarios[]> {
-    return this.nitsRepository.NitUsu(id).find(filter);
+    return this.nitsRepository.KFNitUsuario(id).find(filter);
   }
 
   @post('/nits/{id}/usuarios', {
@@ -60,14 +60,14 @@ export class NitsUsuariosController {
         'application/json': {
           schema: getModelSchemaRef(Usuarios, {
             title: 'NewUsuariosInNits',
-            exclude: ['Id'],
+            exclude: ['IdUsuario'],
             optional: ['IdNit']
           }),
         },
       },
-    }) usuarios: Omit<Usuarios, 'Id'>,
+    }) usuarios: Omit<Usuarios, 'IdUsuario'>,
   ): Promise<Usuarios> {
-    return this.nitsRepository.NitUsu(id).create(usuarios);
+    return this.nitsRepository.KFNitUsuario(id).create(usuarios);
   }
 
   @patch('/nits/{id}/usuarios', {
@@ -90,7 +90,7 @@ export class NitsUsuariosController {
     usuarios: Partial<Usuarios>,
     @param.query.object('where', getWhereSchemaFor(Usuarios)) where?: Where<Usuarios>,
   ): Promise<Count> {
-    return this.nitsRepository.NitUsu(id).patch(usuarios, where);
+    return this.nitsRepository.KFNitUsuario(id).patch(usuarios, where);
   }
 
   @del('/nits/{id}/usuarios', {
@@ -105,6 +105,6 @@ export class NitsUsuariosController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(Usuarios)) where?: Where<Usuarios>,
   ): Promise<Count> {
-    return this.nitsRepository.NitUsu(id).delete(where);
+    return this.nitsRepository.KFNitUsuario(id).delete(where);
   }
 }

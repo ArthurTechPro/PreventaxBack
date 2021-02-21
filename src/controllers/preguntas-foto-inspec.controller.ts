@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  Preguntas,
-  FotoInspec,
+  FotoInspec, Preguntas
 } from '../models';
 import {PreguntasRepository} from '../repositories';
 
@@ -42,7 +41,7 @@ export class PreguntasFotoInspecController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<FotoInspec>,
   ): Promise<FotoInspec[]> {
-    return this.preguntasRepository.PreFoto(id).find(filter);
+    return this.preguntasRepository.FKPreguntFoto(id).find(filter);
   }
 
   @post('/preguntas/{id}/foto-inspecs', {
@@ -67,7 +66,7 @@ export class PreguntasFotoInspecController {
       },
     }) fotoInspec: Omit<FotoInspec, 'Id'>,
   ): Promise<FotoInspec> {
-    return this.preguntasRepository.PreFoto(id).create(fotoInspec);
+    return this.preguntasRepository.FKPreguntFoto(id).create(fotoInspec);
   }
 
   @patch('/preguntas/{id}/foto-inspecs', {
@@ -90,7 +89,7 @@ export class PreguntasFotoInspecController {
     fotoInspec: Partial<FotoInspec>,
     @param.query.object('where', getWhereSchemaFor(FotoInspec)) where?: Where<FotoInspec>,
   ): Promise<Count> {
-    return this.preguntasRepository.PreFoto(id).patch(fotoInspec, where);
+    return this.preguntasRepository.FKPreguntFoto(id).patch(fotoInspec, where);
   }
 
   @del('/preguntas/{id}/foto-inspecs', {
@@ -105,6 +104,6 @@ export class PreguntasFotoInspecController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(FotoInspec)) where?: Where<FotoInspec>,
   ): Promise<Count> {
-    return this.preguntasRepository.PreFoto(id).delete(where);
+    return this.preguntasRepository.FKPreguntFoto(id).delete(where);
   }
 }

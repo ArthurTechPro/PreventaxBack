@@ -1,5 +1,4 @@
-import {Entity, hasMany, model, property} from '@loopback/repository';
-import {Revisiones} from './revisiones.model';
+import {Entity, model, property} from '@loopback/repository';
 
 @model()
 export class Comentarios extends Entity {
@@ -7,27 +6,34 @@ export class Comentarios extends Entity {
     type: 'number',
     id: true,
     generated: true,
+    postgresql: {
+      columnName: 'Id',
+      dataType: "Integer",
+    },
   })
   Id?: number;
 
   @property({
     type: 'string',
     required: true,
+    length: 255,
+    postgresql: {
+      columnName: 'Descrip',
+      dataType: "Varchar",
+      datalength: 255,
+    },
   })
   Descrip: string;
 
   @property({
     type: 'number',
   })
-  IdTipo?: number;
-
-  @hasMany(() => Revisiones, {keyTo: 'IdComent'})
-  ComRev: Revisiones[];
+  IdTipoComent?: number;
 
   @property({
     type: 'number',
   })
-  IdRevicion?: number;
+  IdRevision?: number;
 
   constructor(data?: Partial<Comentarios>) {
     super(data);

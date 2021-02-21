@@ -4,18 +4,22 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {EstadoUsu} from '../models';
 import {EstadoUsuRepository} from '../repositories';
@@ -23,8 +27,8 @@ import {EstadoUsuRepository} from '../repositories';
 export class EstadoUsuController {
   constructor(
     @repository(EstadoUsuRepository)
-    public estadoUsuRepository : EstadoUsuRepository,
-  ) {}
+    public estadoUsuRepository: EstadoUsuRepository,
+  ) { }
 
   @post('/estado-usus')
   @response(200, {
@@ -37,12 +41,12 @@ export class EstadoUsuController {
         'application/json': {
           schema: getModelSchemaRef(EstadoUsu, {
             title: 'NewEstadoUsu',
-            exclude: ['Id'],
+            exclude: ['IdEstado'],
           }),
         },
       },
     })
-    estadoUsu: Omit<EstadoUsu, 'Id'>,
+    estadoUsu: Omit<EstadoUsu, 'IdEstado'>,
   ): Promise<EstadoUsu> {
     return this.estadoUsuRepository.create(estadoUsu);
   }

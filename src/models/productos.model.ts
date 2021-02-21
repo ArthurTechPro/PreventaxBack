@@ -1,4 +1,4 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 import {Inspecciones} from './inspecciones.model';
 import {Revisiones} from './revisiones.model';
 
@@ -8,43 +8,74 @@ export class Productos extends Entity {
     type: 'number',
     id: true,
     generated: true,
+    postgresql: {
+      columnName: 'Id',
+      dataType: "Integer",
+    },
   })
   Id?: number;
 
   @property({
     type: 'string',
     required: true,
+    length: 100,
+    postgresql: {
+      columnName: 'Titulo',
+      dataType: "Varchar",
+      dataLength: 100,
+    },
   })
   Titulo: string;
 
   @property({
+    type: 'string',
+    postgresql: {
+      columnName: 'Descrip',
+      dataType: "Text",
+    },
+  })
+  Descrip?: string;
+
+  @property({
     type: 'date',
     required: true,
+    postgresql: {
+      columnName: 'FechaIni',
+      dataType: "date",
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: "N",
+    },
   })
-  FechaIni: string;
+  FechaIni: Date;
 
   @property({
     type: 'boolean',
     required: true,
+    postgresql: {
+      columnName: 'PublicaWeb',
+      dataType: "Boolean",
+    },
   })
   PublicaWeb: boolean;
+
 
   @property({
     type: 'number',
     required: true,
+    postgresql: {
+      columnName: 'Precio',
+      dataType: "Decimal(16,2)"
+    },
   })
   Precio: number;
 
-  @property({
-    type: 'number',
-  })
-  IdEstado?: number;
+  @hasMany(() => Revisiones, {keyTo: 'IdProducto'})
+  FKProductoRevision: Revisiones[];
 
-  @hasMany(() => Inspecciones, {keyTo: 'IdProduc'})
-  ProdInspec: Inspecciones[];
-
-  @hasMany(() => Revisiones, {keyTo: 'IdProduc'})
-  ProdRev: Revisiones[];
+  @hasMany(() => Inspecciones, {keyTo: 'IdProducto'})
+  FKProducInspec: Inspecciones[];
 
   constructor(data?: Partial<Productos>) {
     super(data);

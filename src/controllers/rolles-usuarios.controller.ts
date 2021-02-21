@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,11 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   Rolles,
-  Usuarios,
+  Usuarios
 } from '../models';
 import {RollesRepository} from '../repositories';
 
@@ -42,7 +42,7 @@ export class RollesUsuariosController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<Usuarios>,
   ): Promise<Usuarios[]> {
-    return this.rollesRepository.RolUsu(id).find(filter);
+    return this.rollesRepository.FKRollUsu(id).find(filter);
   }
 
   @post('/rolles/{id}/usuarios', {
@@ -60,14 +60,14 @@ export class RollesUsuariosController {
         'application/json': {
           schema: getModelSchemaRef(Usuarios, {
             title: 'NewUsuariosInRolles',
-            exclude: ['Id'],
+            exclude: ['IdUsuario'],
             optional: ['IdRoll']
           }),
         },
       },
-    }) usuarios: Omit<Usuarios, 'Id'>,
+    }) usuarios: Omit<Usuarios, 'IdUsuario'>,
   ): Promise<Usuarios> {
-    return this.rollesRepository.RolUsu(id).create(usuarios);
+    return this.rollesRepository.FKRollUsu(id).create(usuarios);
   }
 
   @patch('/rolles/{id}/usuarios', {
@@ -90,7 +90,7 @@ export class RollesUsuariosController {
     usuarios: Partial<Usuarios>,
     @param.query.object('where', getWhereSchemaFor(Usuarios)) where?: Where<Usuarios>,
   ): Promise<Count> {
-    return this.rollesRepository.RolUsu(id).patch(usuarios, where);
+    return this.rollesRepository.FKRollUsu(id).patch(usuarios, where);
   }
 
   @del('/rolles/{id}/usuarios', {
@@ -105,6 +105,6 @@ export class RollesUsuariosController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(Usuarios)) where?: Where<Usuarios>,
   ): Promise<Count> {
-    return this.rollesRepository.RolUsu(id).delete(where);
+    return this.rollesRepository.FKRollUsu(id).delete(where);
   }
 }

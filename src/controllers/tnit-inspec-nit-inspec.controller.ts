@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  TnitInspec,
-  NitInspec,
+  NitInspec, TnitInspec
 } from '../models';
 import {TnitInspecRepository} from '../repositories';
 
@@ -42,7 +41,7 @@ export class TnitInspecNitInspecController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<NitInspec>,
   ): Promise<NitInspec[]> {
-    return this.tnitInspecRepository.TnitInspec(id).find(filter);
+    return this.tnitInspecRepository.FKTipoNit(id).find(filter);
   }
 
   @post('/tnit-inspecs/{id}/nit-inspecs', {
@@ -67,7 +66,7 @@ export class TnitInspecNitInspecController {
       },
     }) nitInspec: Omit<NitInspec, 'Id'>,
   ): Promise<NitInspec> {
-    return this.tnitInspecRepository.TnitInspec(id).create(nitInspec);
+    return this.tnitInspecRepository.FKTipoNit(id).create(nitInspec);
   }
 
   @patch('/tnit-inspecs/{id}/nit-inspecs', {
@@ -90,7 +89,7 @@ export class TnitInspecNitInspecController {
     nitInspec: Partial<NitInspec>,
     @param.query.object('where', getWhereSchemaFor(NitInspec)) where?: Where<NitInspec>,
   ): Promise<Count> {
-    return this.tnitInspecRepository.TnitInspec(id).patch(nitInspec, where);
+    return this.tnitInspecRepository.FKTipoNit(id).patch(nitInspec, where);
   }
 
   @del('/tnit-inspecs/{id}/nit-inspecs', {
@@ -105,6 +104,6 @@ export class TnitInspecNitInspecController {
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(NitInspec)) where?: Where<NitInspec>,
   ): Promise<Count> {
-    return this.tnitInspecRepository.TnitInspec(id).delete(where);
+    return this.tnitInspecRepository.FKTipoNit(id).delete(where);
   }
 }

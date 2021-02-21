@@ -1,14 +1,14 @@
-import {Getter, inject} from '@loopback/core';
-import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
+import {inject, Getter} from '@loopback/core';
+import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {Comentarios, TipoComent, TipoComentRelations} from '../models';
+import {TipoComent, TipoComentRelations, Comentarios} from '../models';
 import {ComentariosRepository} from './comentarios.repository';
 
 export class TipoComentRepository extends DefaultCrudRepository<
   TipoComent,
   typeof TipoComent.prototype.Id,
   TipoComentRelations
-  > {
+> {
 
   public readonly FKTipComet: HasManyRepositoryFactory<Comentarios, typeof TipoComent.prototype.Id>;
 

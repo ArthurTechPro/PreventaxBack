@@ -97,17 +97,6 @@ export class Preguntas extends Entity {
   @hasMany(() => FotoInspec, {keyTo: 'IdPregunta'})
   FKPreguntFoto: FotoInspec[];
 
-  @property({
-    type: 'number',
-  })
-  IdRevision?: number;
-
-  @hasMany(() => Observaciones, {keyTo: 'IdPregunta'})
-  PreObs: Observaciones[];
-
-  @hasMany(() => FotoInspec, {keyTo: 'IdPregunta'})
-  PreFoto: FotoInspec[];
-
   constructor(data?: Partial<Preguntas>) {
     super(data);
   }

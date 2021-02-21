@@ -1,17 +1,17 @@
-import {Getter, inject} from '@loopback/core';
-import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
+import {inject, Getter} from '@loopback/core';
+import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {FotoInspec, Inspecciones, InspeccionesRelations, NitInspec, Observaciones, ValorInspec} from '../models';
-import {FotoInspecRepository} from './foto-inspec.repository';
+import {Inspecciones, InspeccionesRelations, NitInspec, ValorInspec, FotoInspec, Observaciones} from '../models';
 import {NitInspecRepository} from './nit-inspec.repository';
-import {ObservacionesRepository} from './observaciones.repository';
 import {ValorInspecRepository} from './valor-inspec.repository';
+import {FotoInspecRepository} from './foto-inspec.repository';
+import {ObservacionesRepository} from './observaciones.repository';
 
 export class InspeccionesRepository extends DefaultCrudRepository<
   Inspecciones,
   typeof Inspecciones.prototype.Id,
   InspeccionesRelations
-  > {
+> {
 
   public readonly FKInpecNits: HasManyRepositoryFactory<NitInspec, typeof Inspecciones.prototype.Id>;
 
@@ -35,4 +35,3 @@ export class InspeccionesRepository extends DefaultCrudRepository<
     this.registerInclusionResolver('FKInpecNits', this.FKInpecNits.inclusionResolver);
   }
 }
-

@@ -1,8 +1,7 @@
-import {Getter, inject} from '@loopback/core';
-import {DefaultCrudRepository, repository} from '@loopback/repository';
+import {inject} from '@loopback/core';
+import {DefaultCrudRepository} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
 import {EstadoCli, EstadoCliRelations} from '../models';
-import {ClientesRepository} from './clientes.repository';
 
 export class EstadoCliRepository extends DefaultCrudRepository<
   EstadoCli,
@@ -10,7 +9,7 @@ export class EstadoCliRepository extends DefaultCrudRepository<
   EstadoCliRelations
   > {
   constructor(
-    @inject('datasources.Postgres') dataSource: PostgresDataSource, @repository.getter('ClientesRepository') protected clientesRepositoryGetter: Getter<ClientesRepository>,
+    @inject('datasources.Postgres') dataSource: PostgresDataSource,
   ) {
     super(EstadoCli, dataSource);
   }

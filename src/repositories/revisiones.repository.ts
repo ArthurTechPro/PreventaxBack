@@ -1,7 +1,7 @@
-import {Getter, inject} from '@loopback/core';
-import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
+import {inject, Getter} from '@loopback/core';
+import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {Comentarios, Preguntas, Revisiones, RevisionesRelations} from '../models';
+import {Revisiones, RevisionesRelations, Comentarios, Preguntas} from '../models';
 import {ComentariosRepository} from './comentarios.repository';
 import {PreguntasRepository} from './preguntas.repository';
 
@@ -9,7 +9,7 @@ export class RevisionesRepository extends DefaultCrudRepository<
   Revisiones,
   typeof Revisiones.prototype.Id,
   RevisionesRelations
-  > {
+> {
 
   public readonly FKRevisionComet: HasManyRepositoryFactory<Comentarios, typeof Revisiones.prototype.Id>;
 

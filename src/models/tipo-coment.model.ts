@@ -1,4 +1,4 @@
-import {Entity, hasMany, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
 import {Comentarios} from './comentarios.model';
 
 @model()

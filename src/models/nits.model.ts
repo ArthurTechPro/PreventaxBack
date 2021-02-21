@@ -1,6 +1,6 @@
 import {Entity, hasMany, model, property} from '@loopback/repository';
-import {NitInspec} from './nit-inspec.model';
 import {Usuarios} from './usuarios.model';
+import {NitInspec} from './nit-inspec.model';
 
 @model()
 export class Nits extends Entity {

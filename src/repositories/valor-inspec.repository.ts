@@ -1,5 +1,5 @@
-import {Getter, inject} from '@loopback/core';
-import {DefaultCrudRepository, repository} from '@loopback/repository';
+import {inject} from '@loopback/core';
+import {DefaultCrudRepository} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
 import {ValorInspec, ValorInspecRelations} from '../models';
 
@@ -9,7 +9,7 @@ export class ValorInspecRepository extends DefaultCrudRepository<
   ValorInspecRelations
   > {
   constructor(
-    @inject('datasources.Postgres') dataSource: PostgresDataSource, @repository.getter('NitsRepository') protected nitsRepositoryGetter: Getter<NitsRepository>,
+    @inject('datasources.Postgres') dataSource: PostgresDataSource,
   ) {
     super(ValorInspec, dataSource);
   }

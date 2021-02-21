@@ -1,4 +1,5 @@
 import {Entity, hasMany, model, property} from '@loopback/repository';
+import {Usuarios} from './usuarios.model';
 
 @model()
 export class EstadoUsu extends Entity {

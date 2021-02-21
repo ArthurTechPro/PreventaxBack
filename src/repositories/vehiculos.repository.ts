@@ -1,14 +1,14 @@
-import {Getter, inject} from '@loopback/core';
-import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
+import {inject, Getter} from '@loopback/core';
+import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {Inspecciones, Vehiculos, VehiculosRelations} from '../models';
+import {Vehiculos, VehiculosRelations, Inspecciones} from '../models';
 import {InspeccionesRepository} from './inspecciones.repository';
 
 export class VehiculosRepository extends DefaultCrudRepository<
   Vehiculos,
   typeof Vehiculos.prototype.Placa,
   VehiculosRelations
-  > {
+> {
 
   public readonly FKVehiculoInspec: HasManyRepositoryFactory<Inspecciones, typeof Vehiculos.prototype.Placa>;
 

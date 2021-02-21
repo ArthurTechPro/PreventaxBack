@@ -1,14 +1,14 @@
-import {Getter, inject} from '@loopback/core';
-import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
+import {inject, Getter} from '@loopback/core';
+import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {FotoInspec, TipoFoto, TipoFotoRelations} from '../models';
+import {TipoFoto, TipoFotoRelations, FotoInspec} from '../models';
 import {FotoInspecRepository} from './foto-inspec.repository';
 
 export class TipoFotoRepository extends DefaultCrudRepository<
   TipoFoto,
   typeof TipoFoto.prototype.Id,
   TipoFotoRelations
-  > {
+> {
 
   public readonly FKTipoFotoInspec: HasManyRepositoryFactory<FotoInspec, typeof TipoFoto.prototype.Id>;
 

@@ -1,5 +1,5 @@
-import {Getter, inject} from '@loopback/core';
-import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
+import {inject, Getter} from '@loopback/core';
+import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
 import {TipoFuente, TipoFuenteRelations, ValorInspec} from '../models';
 import {ValorInspecRepository} from './valor-inspec.repository';
@@ -8,7 +8,7 @@ export class TipoFuenteRepository extends DefaultCrudRepository<
   TipoFuente,
   typeof TipoFuente.prototype.Id,
   TipoFuenteRelations
-  > {
+> {
 
   public readonly FKTipoFuenteValor: HasManyRepositoryFactory<ValorInspec, typeof TipoFuente.prototype.Id>;
 

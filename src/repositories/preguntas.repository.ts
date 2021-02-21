@@ -1,15 +1,15 @@
-import {Getter, inject} from '@loopback/core';
-import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
+import {inject, Getter} from '@loopback/core';
+import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {FotoInspec, Observaciones, Preguntas, PreguntasRelations} from '../models';
-import {FotoInspecRepository} from './foto-inspec.repository';
+import {Preguntas, PreguntasRelations, Observaciones, FotoInspec} from '../models';
 import {ObservacionesRepository} from './observaciones.repository';
+import {FotoInspecRepository} from './foto-inspec.repository';
 
 export class PreguntasRepository extends DefaultCrudRepository<
   Preguntas,
   typeof Preguntas.prototype.Id,
   PreguntasRelations
-  > {
+> {
 
   public readonly FKPreguntaObserva: HasManyRepositoryFactory<Observaciones, typeof Preguntas.prototype.Id>;
 

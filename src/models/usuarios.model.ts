@@ -1,6 +1,6 @@
-import {belongsTo, Entity, hasMany, model, property} from '@loopback/repository';
-import {Inspecciones} from './inspecciones.model';
+import {belongsTo, Entity, model, property, hasMany} from '@loopback/repository';
 import {Nits} from './nits.model';
+import {Inspecciones} from './inspecciones.model';
 
 @model()
 export class Usuarios extends Entity {

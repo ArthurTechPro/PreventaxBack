@@ -1,14 +1,14 @@
-import {Getter, inject} from '@loopback/core';
-import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
+import {inject, Getter} from '@loopback/core';
+import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {NitInspec, TnitInspec, TnitInspecRelations} from '../models';
+import {TnitInspec, TnitInspecRelations, NitInspec} from '../models';
 import {NitInspecRepository} from './nit-inspec.repository';
 
 export class TnitInspecRepository extends DefaultCrudRepository<
   TnitInspec,
   typeof TnitInspec.prototype.Id,
   TnitInspecRelations
-  > {
+> {
 
   public readonly FKTipoNit: HasManyRepositoryFactory<NitInspec, typeof TnitInspec.prototype.Id>;
 

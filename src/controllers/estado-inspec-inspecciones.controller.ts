@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where
+  Where,
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,11 @@ import {
   param,
   patch,
   post,
-  requestBody
+  requestBody,
 } from '@loopback/rest';
 import {
   EstadoInspec,
-  Inspecciones
+  Inspecciones,
 } from '../models';
 import {EstadoInspecRepository} from '../repositories';
 

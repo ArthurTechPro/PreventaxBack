@@ -1,6 +1,6 @@
-import {Entity, hasMany, model, property} from '@loopback/repository';
-import {Inspecciones} from './inspecciones.model';
+import {Entity, model, property, hasMany} from '@loopback/repository';
 import {Revisiones} from './revisiones.model';
+import {Inspecciones} from './inspecciones.model';
 
 @model()
 export class Productos extends Entity {

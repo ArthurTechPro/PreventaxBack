@@ -1,9 +1,9 @@
 import {Getter, inject} from '@loopback/core';
-import {BelongsToAccessor, DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
+import {BelongsToAccessor, DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {Inspecciones, Nits, Usuarios, UsuariosRelations} from '../models';
-import {InspeccionesRepository} from './inspecciones.repository';
+import {Nits, Usuarios, UsuariosRelations, Inspecciones} from '../models';
 import {NitsRepository} from './nits.repository';
+import {InspeccionesRepository} from './inspecciones.repository';
 
 export class UsuariosRepository extends DefaultCrudRepository<
   Usuarios,

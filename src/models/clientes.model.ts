@@ -16,11 +16,6 @@ export class Clientes extends Entity {
   Usuario: string;
 
   @property({
-    type: 'number'
-  })
-  IdNits: number;
-
-  @property({
     type: 'string',
     required: true,
   })
@@ -43,10 +38,6 @@ export class Clientes extends Entity {
   })
   FechaCrea?: Date;
 
-  @property({
-    type: 'number',
-  })
-  IdEstado?: number;
 
   constructor(data?: Partial<Clientes>) {
     super(data);

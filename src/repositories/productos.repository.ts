@@ -1,15 +1,15 @@
-import {Getter, inject} from '@loopback/core';
-import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
+import {inject, Getter} from '@loopback/core';
+import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {Inspecciones, Productos, ProductosRelations, Revisiones} from '../models';
-import {InspeccionesRepository} from './inspecciones.repository';
+import {Productos, ProductosRelations, Revisiones, Inspecciones} from '../models';
 import {RevisionesRepository} from './revisiones.repository';
+import {InspeccionesRepository} from './inspecciones.repository';
 
 export class ProductosRepository extends DefaultCrudRepository<
   Productos,
   typeof Productos.prototype.Id,
   ProductosRelations
-  > {
+> {
 
   public readonly FKProductoRevision: HasManyRepositoryFactory<Revisiones, typeof Productos.prototype.Id>;
 

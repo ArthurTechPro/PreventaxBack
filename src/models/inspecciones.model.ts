@@ -64,7 +64,6 @@ export class Inspecciones extends Entity {
 
   @property({
     type: 'date',
-    required: true,
     postgresql: {
       columnName: 'VenceSOAT',
       dataType: "date",
@@ -77,7 +76,6 @@ export class Inspecciones extends Entity {
 
   @property({
     type: 'date',
-    required: true,
     postgresql: {
       columnName: 'VenceRTM',
       dataType: "date",
@@ -91,11 +89,11 @@ export class Inspecciones extends Entity {
   @property({
     type: 'string',
     postgresql: {
-      columnName: 'JSONRevision',
+      columnName: 'JsonInspeccion',
       dataType: "Text",
     },
   })
-  JSONRevision?: string;
+  JsonInspeccion?: string;
 
   @property({
     type: 'number',

@@ -6,10 +6,9 @@ export class Rolles extends Entity {
   @property({
     type: 'number',
     id: true,
-    generated: true,
     postgresql: {
       columnName: 'Id',
-      dataType: "Integer",
+      dataType: "decimal",
     },
   })
   Id?: number;

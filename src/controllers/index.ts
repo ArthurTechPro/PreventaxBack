@@ -35,3 +35,20 @@ export * from './usuarios.controller';
 export * from './vehiculos-inspecciones.controller';
 
 
+export * from './estado-prod.controller';
+export * from './estado-inspec.controller';
+export * from './marcas.controller';
+export * from './clases.controller';
+export * from './servicios.controller';
+export * from './vehiculos.controller';
+export * from './tipo-fuente.controller';
+export * from './tipo-foto.controller';
+export * from './tipo-coment.controller';
+export * from './comentarios.controller';
+export * from './preguntas.controller';
+export * from './revisiones.controller';
+export * from './observaciones.controller';
+export * from './productos.controller';
+export * from './valor-inspec.controller';
+export * from './foto-inspec.controller';
+export * from './inspecciones.controller';

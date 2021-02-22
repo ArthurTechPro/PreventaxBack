@@ -41,7 +41,6 @@ export class RollesController {
         'application/json': {
           schema: getModelSchemaRef(Rolles, {
             title: 'NewRolles',
-            exclude: ['Id'],
           }),
         },
       },

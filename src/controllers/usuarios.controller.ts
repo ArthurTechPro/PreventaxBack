@@ -4,27 +4,33 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
+import {ServiceKeys as keys} from '../config/service-keys';
 import {Usuarios} from '../models';
 import {UsuariosRepository} from '../repositories';
+import {EncryptDecrypt} from '../services/encrypt-decrypt.services';
 
 export class UsuariosController {
   constructor(
     @repository(UsuariosRepository)
-    public usuariosRepository : UsuariosRepository,
-  ) {}
+    public usuariosRepository: UsuariosRepository,
+  ) { }
 
   @post('/usuarios')
   @response(200, {
@@ -44,6 +50,7 @@ export class UsuariosController {
     })
     usuarios: Omit<Usuarios, 'IdUsuario'>,
   ): Promise<Usuarios> {
+    usuarios.Passsword = new EncryptDecrypt(keys.MD5).encrypt(usuarios.Passsword);
     return this.usuariosRepository.create(usuarios);
   }
 

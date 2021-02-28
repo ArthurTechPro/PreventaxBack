@@ -43,12 +43,12 @@ export class UsuariosController {
         'application/json': {
           schema: getModelSchemaRef(Usuarios, {
             title: 'NewUsuarios',
-            exclude: ['IdUsuario'],
+            exclude: ['Id'],
           }),
         },
       },
     })
-    usuarios: Omit<Usuarios, 'IdUsuario'>,
+    usuarios: Omit<Usuarios, 'Id'>,
   ): Promise<Usuarios> {
     usuarios.Passsword = new EncryptDecrypt(keys.MD5).encrypt(usuarios.Passsword);
     return this.usuariosRepository.create(usuarios);

@@ -60,12 +60,12 @@ export class RollesUsuariosController {
         'application/json': {
           schema: getModelSchemaRef(Usuarios, {
             title: 'NewUsuariosInRolles',
-            exclude: ['IdUsuario'],
+            exclude: ['Id'],
             optional: ['IdRoll']
           }),
         },
       },
-    }) usuarios: Omit<Usuarios, 'IdUsuario'>,
+    }) usuarios: Omit<Usuarios, 'Id'>,
   ): Promise<Usuarios> {
     return this.rollesRepository.FKRollUsu(id).create(usuarios);
   }

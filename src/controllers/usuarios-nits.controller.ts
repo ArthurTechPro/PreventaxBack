@@ -29,7 +29,7 @@ export class UsuariosNitsController {
     },
   })
   async getNits(
-    @param.path.number('id') id: typeof Usuarios.prototype.IdUsuario,
+    @param.path.number('id') id: typeof Usuarios.prototype.Id,
   ): Promise<Nits> {
     return this.usuariosRepository.btUsuNit(id);
   }

@@ -13,12 +13,10 @@ export class EncryptDecrypt {
         return CryptoJS.MD5(text).toString();
         break;
       case keys.AES:
-        return CryptoJS.AES.encrypt(text, keys.AES_SECRET_KEY).toString();
+        return CryptoJS.AES.encrypt(text, keys.AES_SECRET).toString();
         break;
       case keys.SHA_512:
-
         break;
-
       default:
         return "This type of crypt is not supported."
         break;

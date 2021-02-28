@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,11 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   Nits,
-  Usuarios,
+  Usuarios
 } from '../models';
 import {NitsRepository} from '../repositories';
 
@@ -60,12 +60,12 @@ export class NitsUsuariosController {
         'application/json': {
           schema: getModelSchemaRef(Usuarios, {
             title: 'NewUsuariosInNits',
-            exclude: ['IdUsuario'],
+            exclude: ['Id'],
             optional: ['IdNit']
           }),
         },
       },
-    }) usuarios: Omit<Usuarios, 'IdUsuario'>,
+    }) usuarios: Omit<Usuarios, 'Id'>,
   ): Promise<Usuarios> {
     return this.nitsRepository.KFNitUsuario(id).create(usuarios);
   }

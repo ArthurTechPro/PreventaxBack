@@ -1,6 +1,6 @@
-import {belongsTo, Entity, model, property, hasMany} from '@loopback/repository';
-import {Nits} from './nits.model';
+import {belongsTo, Entity, hasMany, model, property} from '@loopback/repository';
 import {Inspecciones} from './inspecciones.model';
+import {Nits} from './nits.model';
 
 @model()
 export class Usuarios extends Entity {
@@ -9,11 +9,11 @@ export class Usuarios extends Entity {
     id: true,
     generated: true,
     postgresql: {
-      columnName: 'IdUsuario',
+      columnName: 'Id',
       dataType: "Integer",
     },
   })
-  IdUsuario?: number;
+  Id?: number;
 
   @property({
     type: 'string',
@@ -102,7 +102,7 @@ export class Usuarios extends Entity {
   @belongsTo(() => Nits, {name: 'btUsuNit'})
   IdNit: number;
 
-  @hasMany(() => Inspecciones, {keyTo: 'IdUsuario'})
+  @hasMany(() => Inspecciones, {keyTo: 'Id'})
   FKUsuInspec: Inspecciones[];
 
   constructor(data?: Partial<Usuarios>) {

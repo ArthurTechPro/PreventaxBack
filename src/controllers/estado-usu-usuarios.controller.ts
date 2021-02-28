@@ -60,12 +60,12 @@ export class EstadoUsuUsuariosController {
         'application/json': {
           schema: getModelSchemaRef(Usuarios, {
             title: 'NewUsuariosInEstadoUsu',
-            exclude: ['IdUsuario'],
+            exclude: ['Id'],
             optional: ['IdEstadoUsu']
           }),
         },
       },
-    }) usuarios: Omit<Usuarios, 'IdUsuario'>,
+    }) usuarios: Omit<Usuarios, 'Id'>,
   ): Promise<Usuarios> {
     return this.estadoUsuRepository.FKEstadoUsu(id).create(usuarios);
   }

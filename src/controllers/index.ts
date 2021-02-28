@@ -52,3 +52,4 @@ export * from './productos.controller';
 export * from './valor-inspec.controller';
 export * from './foto-inspec.controller';
 export * from './inspecciones.controller';
+export * from './user.controller';

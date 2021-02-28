@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  Usuarios,
-  Inspecciones,
+  Inspecciones, Usuarios
 } from '../models';
 import {UsuariosRepository} from '../repositories';
 
@@ -54,14 +53,14 @@ export class UsuariosInspeccionesController {
     },
   })
   async create(
-    @param.path.number('id') id: typeof Usuarios.prototype.IdUsuario,
+    @param.path.number('id') id: typeof Usuarios.prototype.Id,
     @requestBody({
       content: {
         'application/json': {
           schema: getModelSchemaRef(Inspecciones, {
             title: 'NewInspeccionesInUsuarios',
             exclude: ['Id'],
-            optional: ['IdUsuario']
+            optional: ['Id']
           }),
         },
       },

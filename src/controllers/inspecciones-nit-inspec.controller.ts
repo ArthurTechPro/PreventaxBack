@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,11 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   Inspecciones,
-  NitInspec,
+  NitInspec
 } from '../models';
 import {InspeccionesRepository} from '../repositories';
 
@@ -61,7 +61,7 @@ export class InspeccionesNitInspecController {
           schema: getModelSchemaRef(NitInspec, {
             title: 'NewNitInspecInInspecciones',
             exclude: ['Id'],
-            optional: ['IdInspeccion']
+            optional: ['IdInspec']
           }),
         },
       },

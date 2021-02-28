@@ -110,7 +110,7 @@ export class Inspecciones extends Entity {
   })
   IdProducto?: number;
 
-  @hasMany(() => NitInspec, {keyTo: 'IdInspeccion'})
+  @hasMany(() => NitInspec, {keyTo: 'IdInspec'})
   FKInpecNits: NitInspec[];
 
   @property({

@@ -56,16 +56,20 @@
     "@loopback/rest-explorer": "^3.0.6",
     "@loopback/service-proxy": "^3.0.6",
     "crypto-js": "^4.0.0",
+    "generate-password": "^1.6.0",
+    "jsonwebtoken": "^8.5.1",
     "loopback-connector-postgresql": "^5.3.0",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
     "@loopback/build": "^6.2.9",
-    "source-map-support": "^0.5.19",
+    "@loopback/eslint-config": "^10.0.5",
     "@loopback/testlab": "^3.2.11",
     "@types/node": "^10.17.51",
-    "@loopback/eslint-config": "^10.0.5",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "eslint": "^7.18.0",
+    "source-map-support": "^0.5.19",
     "typescript": "~4.1.3"
   }
 }

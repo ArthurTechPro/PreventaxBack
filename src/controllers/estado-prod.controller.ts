@@ -1,21 +1,27 @@
+
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {EstadoProd} from '../models';
 import {EstadoProdRepository} from '../repositories';
@@ -23,9 +29,10 @@ import {EstadoProdRepository} from '../repositories';
 export class EstadoProdController {
   constructor(
     @repository(EstadoProdRepository)
-    public estadoProdRepository : EstadoProdRepository,
-  ) {}
+    public estadoProdRepository: EstadoProdRepository,
+  ) { }
 
+  @authenticate('TokenStrategy')
   @post('/estado-prods')
   @response(200, {
     description: 'EstadoProd model instance',
@@ -76,6 +83,7 @@ export class EstadoProdController {
     return this.estadoProdRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/estado-prods')
   @response(200, {
     description: 'EstadoProd PATCH success count',
@@ -111,6 +119,7 @@ export class EstadoProdController {
     return this.estadoProdRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/estado-prods/{id}')
   @response(204, {
     description: 'EstadoProd PATCH success',
@@ -129,6 +138,7 @@ export class EstadoProdController {
     await this.estadoProdRepository.updateById(id, estadoProd);
   }
 
+  @authenticate('TokenStrategy')
   @put('/estado-prods/{id}')
   @response(204, {
     description: 'EstadoProd PUT success',
@@ -140,6 +150,7 @@ export class EstadoProdController {
     await this.estadoProdRepository.replaceById(id, estadoProd);
   }
 
+  @authenticate('TokenStrategy')
   @del('/estado-prods/{id}')
   @response(204, {
     description: 'EstadoProd DELETE success',

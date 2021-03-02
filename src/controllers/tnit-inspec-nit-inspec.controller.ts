@@ -1,9 +1,11 @@
+
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +15,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  TnitInspec,
-  NitInspec,
+  NitInspec, TnitInspec
 } from '../models';
 import {TnitInspecRepository} from '../repositories';
 
@@ -45,6 +46,7 @@ export class TnitInspecNitInspecController {
     return this.tnitInspecRepository.FKTipoNit(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/tnit-inspecs/{id}/nit-inspecs', {
     responses: {
       '200': {
@@ -70,6 +72,7 @@ export class TnitInspecNitInspecController {
     return this.tnitInspecRepository.FKTipoNit(id).create(nitInspec);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/tnit-inspecs/{id}/nit-inspecs', {
     responses: {
       '200': {
@@ -93,6 +96,7 @@ export class TnitInspecNitInspecController {
     return this.tnitInspecRepository.FKTipoNit(id).patch(nitInspec, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/tnit-inspecs/{id}/nit-inspecs', {
     responses: {
       '200': {

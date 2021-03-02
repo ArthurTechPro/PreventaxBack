@@ -1,21 +1,26 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {Productos} from '../models';
 import {ProductosRepository} from '../repositories';
@@ -23,9 +28,10 @@ import {ProductosRepository} from '../repositories';
 export class ProductosController {
   constructor(
     @repository(ProductosRepository)
-    public productosRepository : ProductosRepository,
-  ) {}
+    public productosRepository: ProductosRepository,
+  ) { }
 
+  @authenticate('TokenStrategy')
   @post('/productos')
   @response(200, {
     description: 'Productos model instance',
@@ -76,6 +82,7 @@ export class ProductosController {
     return this.productosRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/productos')
   @response(200, {
     description: 'Productos PATCH success count',
@@ -111,6 +118,7 @@ export class ProductosController {
     return this.productosRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/productos/{id}')
   @response(204, {
     description: 'Productos PATCH success',
@@ -129,6 +137,7 @@ export class ProductosController {
     await this.productosRepository.updateById(id, productos);
   }
 
+  @authenticate('TokenStrategy')
   @put('/productos/{id}')
   @response(204, {
     description: 'Productos PUT success',
@@ -140,6 +149,7 @@ export class ProductosController {
     await this.productosRepository.replaceById(id, productos);
   }
 
+  @authenticate('TokenStrategy')
   @del('/productos/{id}')
   @response(204, {
     description: 'Productos DELETE success',

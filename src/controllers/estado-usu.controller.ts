@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -30,6 +31,7 @@ export class EstadoUsuController {
     public estadoUsuRepository: EstadoUsuRepository,
   ) { }
 
+  @authenticate('TokenStrategy')  // Usuaro debe estar autenticado
   @post('/estado-usus')
   @response(200, {
     description: 'EstadoUsu model instance',
@@ -62,6 +64,7 @@ export class EstadoUsuController {
     return this.estadoUsuRepository.count(where);
   }
 
+
   @get('/estado-usus')
   @response(200, {
     description: 'Array of EstadoUsu model instances',
@@ -80,6 +83,7 @@ export class EstadoUsuController {
     return this.estadoUsuRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/estado-usus')
   @response(200, {
     description: 'EstadoUsu PATCH success count',
@@ -99,6 +103,7 @@ export class EstadoUsuController {
     return this.estadoUsuRepository.updateAll(estadoUsu, where);
   }
 
+
   @get('/estado-usus/{id}')
   @response(200, {
     description: 'EstadoUsu model instance',
@@ -115,6 +120,7 @@ export class EstadoUsuController {
     return this.estadoUsuRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/estado-usus/{id}')
   @response(204, {
     description: 'EstadoUsu PATCH success',
@@ -133,6 +139,8 @@ export class EstadoUsuController {
     await this.estadoUsuRepository.updateById(id, estadoUsu);
   }
 
+
+  @authenticate('TokenStrategy')
   @put('/estado-usus/{id}')
   @response(204, {
     description: 'EstadoUsu PUT success',
@@ -144,6 +152,7 @@ export class EstadoUsuController {
     await this.estadoUsuRepository.replaceById(id, estadoUsu);
   }
 
+  @authenticate('TokenStrategy')
   @del('/estado-usus/{id}')
   @response(204, {
     description: 'EstadoUsu DELETE success',

@@ -1,21 +1,26 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {Marcas} from '../models';
 import {MarcasRepository} from '../repositories';
@@ -23,9 +28,10 @@ import {MarcasRepository} from '../repositories';
 export class MarcasController {
   constructor(
     @repository(MarcasRepository)
-    public marcasRepository : MarcasRepository,
-  ) {}
+    public marcasRepository: MarcasRepository,
+  ) { }
 
+  @authenticate('TokenStrategy')
   @post('/marcas')
   @response(200, {
     description: 'Marcas model instance',
@@ -37,7 +43,7 @@ export class MarcasController {
         'application/json': {
           schema: getModelSchemaRef(Marcas, {
             title: 'NewMarcas',
-            
+
           }),
         },
       },
@@ -76,6 +82,7 @@ export class MarcasController {
     return this.marcasRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/marcas')
   @response(200, {
     description: 'Marcas PATCH success count',
@@ -111,6 +118,7 @@ export class MarcasController {
     return this.marcasRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/marcas/{id}')
   @response(204, {
     description: 'Marcas PATCH success',
@@ -129,6 +137,7 @@ export class MarcasController {
     await this.marcasRepository.updateById(id, marcas);
   }
 
+  @authenticate('TokenStrategy')
   @put('/marcas/{id}')
   @response(204, {
     description: 'Marcas PUT success',
@@ -140,6 +149,7 @@ export class MarcasController {
     await this.marcasRepository.replaceById(id, marcas);
   }
 
+  @authenticate('TokenStrategy')
   @del('/marcas/{id}')
   @response(204, {
     description: 'Marcas DELETE success',

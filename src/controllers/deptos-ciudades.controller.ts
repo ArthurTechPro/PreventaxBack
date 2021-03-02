@@ -1,3 +1,5 @@
+
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -44,6 +46,7 @@ export class GenDeptosGenCiudadesController {
     return this.deptosRepository.FKDeptosCiudad(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/deptos/{id}/gen-ciudades', {
     responses: {
       '200': {
@@ -69,6 +72,7 @@ export class GenDeptosGenCiudadesController {
     return this.deptosRepository.FKDeptosCiudad(id).create(ciudades);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/deptos/{id}/gen-ciudades', {
     responses: {
       '200': {
@@ -92,6 +96,7 @@ export class GenDeptosGenCiudadesController {
     return this.deptosRepository.FKDeptosCiudad(id).patch(ciudades, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/deptos/{id}/gen-ciudades', {
     responses: {
       '200': {

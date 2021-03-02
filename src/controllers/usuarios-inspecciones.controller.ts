@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -44,6 +45,7 @@ export class UsuariosInspeccionesController {
     return this.usuariosRepository.FKUsuInspec(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/usuarios/{id}/inspecciones', {
     responses: {
       '200': {
@@ -69,6 +71,7 @@ export class UsuariosInspeccionesController {
     return this.usuariosRepository.FKUsuInspec(id).create(inspecciones);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/usuarios/{id}/inspecciones', {
     responses: {
       '200': {
@@ -92,6 +95,7 @@ export class UsuariosInspeccionesController {
     return this.usuariosRepository.FKUsuInspec(id).patch(inspecciones, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/usuarios/{id}/inspecciones', {
     responses: {
       '200': {

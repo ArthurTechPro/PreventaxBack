@@ -1,21 +1,27 @@
+
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {TipoComent} from '../models';
 import {TipoComentRepository} from '../repositories';
@@ -23,9 +29,10 @@ import {TipoComentRepository} from '../repositories';
 export class TipoComentController {
   constructor(
     @repository(TipoComentRepository)
-    public tipoComentRepository : TipoComentRepository,
-  ) {}
+    public tipoComentRepository: TipoComentRepository,
+  ) { }
 
+  @authenticate('TokenStrategy')
   @post('/tipo-coments')
   @response(200, {
     description: 'TipoComent model instance',
@@ -76,6 +83,7 @@ export class TipoComentController {
     return this.tipoComentRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/tipo-coments')
   @response(200, {
     description: 'TipoComent PATCH success count',
@@ -111,6 +119,7 @@ export class TipoComentController {
     return this.tipoComentRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/tipo-coments/{id}')
   @response(204, {
     description: 'TipoComent PATCH success',
@@ -129,6 +138,7 @@ export class TipoComentController {
     await this.tipoComentRepository.updateById(id, tipoComent);
   }
 
+  @authenticate('TokenStrategy')
   @put('/tipo-coments/{id}')
   @response(204, {
     description: 'TipoComent PUT success',
@@ -140,6 +150,7 @@ export class TipoComentController {
     await this.tipoComentRepository.replaceById(id, tipoComent);
   }
 
+  @authenticate('TokenStrategy')
   @del('/tipo-coments/{id}')
   @response(204, {
     description: 'TipoComent DELETE success',

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -45,6 +46,7 @@ export class InspeccionesNitInspecController {
     return this.inspeccionesRepository.FKInpecNits(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/inspecciones/{id}/nit-inspecs', {
     responses: {
       '200': {
@@ -70,6 +72,7 @@ export class InspeccionesNitInspecController {
     return this.inspeccionesRepository.FKInpecNits(id).create(nitInspec);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/inspecciones/{id}/nit-inspecs', {
     responses: {
       '200': {
@@ -93,6 +96,7 @@ export class InspeccionesNitInspecController {
     return this.inspeccionesRepository.FKInpecNits(id).patch(nitInspec, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/inspecciones/{id}/nit-inspecs', {
     responses: {
       '200': {

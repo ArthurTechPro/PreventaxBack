@@ -1,3 +1,5 @@
+
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -32,6 +34,7 @@ export class UsuariosController {
     public usuariosRepository: UsuariosRepository,
   ) { }
 
+  @authenticate('TokenStrategy')
   @post('/usuarios')
   @response(200, {
     description: 'Usuarios model instance',
@@ -83,6 +86,7 @@ export class UsuariosController {
     return this.usuariosRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/usuarios')
   @response(200, {
     description: 'Usuarios PATCH success count',
@@ -118,6 +122,7 @@ export class UsuariosController {
     return this.usuariosRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/usuarios/{id}')
   @response(204, {
     description: 'Usuarios PATCH success',
@@ -136,6 +141,7 @@ export class UsuariosController {
     await this.usuariosRepository.updateById(id, usuarios);
   }
 
+  @authenticate('TokenStrategy')
   @put('/usuarios/{id}')
   @response(204, {
     description: 'Usuarios PUT success',
@@ -147,6 +153,7 @@ export class UsuariosController {
     await this.usuariosRepository.replaceById(id, usuarios);
   }
 
+  @authenticate('TokenStrategy')
   @del('/usuarios/{id}')
   @response(204, {
     description: 'Usuarios DELETE success',

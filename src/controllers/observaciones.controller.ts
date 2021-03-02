@@ -1,21 +1,26 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {Observaciones} from '../models';
 import {ObservacionesRepository} from '../repositories';
@@ -23,9 +28,10 @@ import {ObservacionesRepository} from '../repositories';
 export class ObservacionesController {
   constructor(
     @repository(ObservacionesRepository)
-    public observacionesRepository : ObservacionesRepository,
-  ) {}
+    public observacionesRepository: ObservacionesRepository,
+  ) { }
 
+  @authenticate('TokenStrategy')
   @post('/observaciones')
   @response(200, {
     description: 'Observaciones model instance',
@@ -47,6 +53,7 @@ export class ObservacionesController {
     return this.observacionesRepository.create(observaciones);
   }
 
+  @authenticate('TokenStrategy')
   @get('/observaciones/count')
   @response(200, {
     description: 'Observaciones model count',
@@ -76,6 +83,7 @@ export class ObservacionesController {
     return this.observacionesRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/observaciones')
   @response(200, {
     description: 'Observaciones PATCH success count',
@@ -111,6 +119,7 @@ export class ObservacionesController {
     return this.observacionesRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/observaciones/{id}')
   @response(204, {
     description: 'Observaciones PATCH success',
@@ -129,6 +138,7 @@ export class ObservacionesController {
     await this.observacionesRepository.updateById(id, observaciones);
   }
 
+  @authenticate('TokenStrategy')
   @put('/observaciones/{id}')
   @response(204, {
     description: 'Observaciones PUT success',
@@ -140,6 +150,7 @@ export class ObservacionesController {
     await this.observacionesRepository.replaceById(id, observaciones);
   }
 
+  @authenticate('TokenStrategy')
   @del('/observaciones/{id}')
   @response(204, {
     description: 'Observaciones DELETE success',

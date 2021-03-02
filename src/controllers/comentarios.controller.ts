@@ -1,21 +1,26 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {Comentarios} from '../models';
 import {ComentariosRepository} from '../repositories';
@@ -23,8 +28,8 @@ import {ComentariosRepository} from '../repositories';
 export class ComentariosController {
   constructor(
     @repository(ComentariosRepository)
-    public comentariosRepository : ComentariosRepository,
-  ) {}
+    public comentariosRepository: ComentariosRepository,
+  ) { }
 
   @post('/comentarios')
   @response(200, {
@@ -76,6 +81,7 @@ export class ComentariosController {
     return this.comentariosRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/comentarios')
   @response(200, {
     description: 'Comentarios PATCH success count',
@@ -95,6 +101,7 @@ export class ComentariosController {
     return this.comentariosRepository.updateAll(comentarios, where);
   }
 
+
   @get('/comentarios/{id}')
   @response(200, {
     description: 'Comentarios model instance',
@@ -111,6 +118,7 @@ export class ComentariosController {
     return this.comentariosRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/comentarios/{id}')
   @response(204, {
     description: 'Comentarios PATCH success',
@@ -129,6 +137,7 @@ export class ComentariosController {
     await this.comentariosRepository.updateById(id, comentarios);
   }
 
+  @authenticate('TokenStrategy')
   @put('/comentarios/{id}')
   @response(204, {
     description: 'Comentarios PUT success',
@@ -140,6 +149,7 @@ export class ComentariosController {
     await this.comentariosRepository.replaceById(id, comentarios);
   }
 
+  @authenticate('TokenStrategy')
   @del('/comentarios/{id}')
   @response(204, {
     description: 'Comentarios DELETE success',

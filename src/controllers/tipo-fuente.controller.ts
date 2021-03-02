@@ -1,21 +1,26 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {TipoFuente} from '../models';
 import {TipoFuenteRepository} from '../repositories';
@@ -23,9 +28,10 @@ import {TipoFuenteRepository} from '../repositories';
 export class TipoFuenteController {
   constructor(
     @repository(TipoFuenteRepository)
-    public tipoFuenteRepository : TipoFuenteRepository,
-  ) {}
+    public tipoFuenteRepository: TipoFuenteRepository,
+  ) { }
 
+  @authenticate('TokenStrategy')
   @post('/tipo-fuentes')
   @response(200, {
     description: 'TipoFuente model instance',
@@ -47,6 +53,7 @@ export class TipoFuenteController {
     return this.tipoFuenteRepository.create(tipoFuente);
   }
 
+  @authenticate('TokenStrategy')
   @get('/tipo-fuentes/count')
   @response(200, {
     description: 'TipoFuente model count',
@@ -57,6 +64,7 @@ export class TipoFuenteController {
   ): Promise<Count> {
     return this.tipoFuenteRepository.count(where);
   }
+
 
   @get('/tipo-fuentes')
   @response(200, {
@@ -76,6 +84,7 @@ export class TipoFuenteController {
     return this.tipoFuenteRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/tipo-fuentes')
   @response(200, {
     description: 'TipoFuente PATCH success count',
@@ -111,6 +120,7 @@ export class TipoFuenteController {
     return this.tipoFuenteRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/tipo-fuentes/{id}')
   @response(204, {
     description: 'TipoFuente PATCH success',
@@ -129,6 +139,7 @@ export class TipoFuenteController {
     await this.tipoFuenteRepository.updateById(id, tipoFuente);
   }
 
+  @authenticate('TokenStrategy')
   @put('/tipo-fuentes/{id}')
   @response(204, {
     description: 'TipoFuente PUT success',
@@ -140,6 +151,7 @@ export class TipoFuenteController {
     await this.tipoFuenteRepository.replaceById(id, tipoFuente);
   }
 
+  @authenticate('TokenStrategy')
   @del('/tipo-fuentes/{id}')
   @response(204, {
     description: 'TipoFuente DELETE success',

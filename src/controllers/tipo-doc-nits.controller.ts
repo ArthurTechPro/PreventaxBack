@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -44,6 +45,7 @@ export class TipoDocNitsController {
     return this.tipoDocRepository.FKTipoDocNIt(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/tipo-docs/{id}/nits', {
     responses: {
       '200': {
@@ -69,6 +71,7 @@ export class TipoDocNitsController {
     return this.tipoDocRepository.FKTipoDocNIt(id).create(nits);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/tipo-docs/{id}/nits', {
     responses: {
       '200': {
@@ -92,6 +95,7 @@ export class TipoDocNitsController {
     return this.tipoDocRepository.FKTipoDocNIt(id).patch(nits, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/tipo-docs/{id}/nits', {
     responses: {
       '200': {

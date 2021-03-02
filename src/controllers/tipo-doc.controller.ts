@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -30,6 +31,7 @@ export class TipoDocController {
     public tipoDocRepository: TipoDocRepository,
   ) { }
 
+  @authenticate('TokenStrategy')
   @post('/tipo-docs')
   @response(200, {
     description: 'TipoDoc model instance',
@@ -80,6 +82,7 @@ export class TipoDocController {
     return this.tipoDocRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/tipo-docs')
   @response(200, {
     description: 'TipoDoc PATCH success count',
@@ -115,6 +118,7 @@ export class TipoDocController {
     return this.tipoDocRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/tipo-docs/{id}')
   @response(204, {
     description: 'TipoDoc PATCH success',
@@ -133,6 +137,7 @@ export class TipoDocController {
     await this.tipoDocRepository.updateById(id, tipoDoc);
   }
 
+  @authenticate('TokenStrategy')
   @put('/tipo-docs/{id}')
   @response(204, {
     description: 'TipoDoc PUT success',
@@ -144,6 +149,7 @@ export class TipoDocController {
     await this.tipoDocRepository.replaceById(id, tipoDoc);
   }
 
+  @authenticate('TokenStrategy')
   @del('/tipo-docs/{id}')
   @response(204, {
     description: 'TipoDoc DELETE success',

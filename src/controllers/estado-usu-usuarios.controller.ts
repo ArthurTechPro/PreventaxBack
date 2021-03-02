@@ -1,3 +1,5 @@
+
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -45,6 +47,7 @@ export class EstadoUsuUsuariosController {
     return this.estadoUsuRepository.FKEstadoUsu(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/estado-usus/{id}/usuarios', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class EstadoUsuUsuariosController {
     return this.estadoUsuRepository.FKEstadoUsu(id).create(usuarios);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/estado-usus/{id}/usuarios', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class EstadoUsuUsuariosController {
     return this.estadoUsuRepository.FKEstadoUsu(id).patch(usuarios, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/estado-usus/{id}/usuarios', {
     responses: {
       '200': {

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -30,6 +31,7 @@ export class CiudadesController {
     public ciudadesRepository: CiudadesRepository,
   ) { }
 
+  @authenticate('TokenStrategy')
   @post('/ciudades')
   @response(200, {
     description: 'GenCiudades model instance',
@@ -80,6 +82,7 @@ export class CiudadesController {
     return this.ciudadesRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/ciudades')
   @response(200, {
     description: 'GenCiudades PATCH success count',
@@ -115,6 +118,7 @@ export class CiudadesController {
     return this.ciudadesRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/ciudades/{id}')
   @response(204, {
     description: 'GenCiudades PATCH success',
@@ -133,6 +137,8 @@ export class CiudadesController {
     await this.ciudadesRepository.updateById(id, ciudades);
   }
 
+
+  @authenticate('TokenStrategy')
   @put('/ciudades/{id}')
   @response(204, {
     description: 'GenCiudades PUT success',
@@ -144,6 +150,7 @@ export class CiudadesController {
     await this.ciudadesRepository.replaceById(id, ciudades);
   }
 
+  @authenticate('TokenStrategy')
   @del('/gen-ciudades/{id}')
   @response(204, {
     description: 'GenCiudades DELETE success',

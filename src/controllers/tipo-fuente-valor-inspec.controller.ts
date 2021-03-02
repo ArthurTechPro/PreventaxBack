@@ -1,9 +1,10 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +14,11 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   TipoFuente,
-  ValorInspec,
+  ValorInspec
 } from '../models';
 import {TipoFuenteRepository} from '../repositories';
 
@@ -45,6 +46,7 @@ export class TipoFuenteValorInspecController {
     return this.tipoFuenteRepository.FKTipoFuenteValor(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/tipo-fuentes/{id}/valor-inspecs', {
     responses: {
       '200': {
@@ -70,6 +72,7 @@ export class TipoFuenteValorInspecController {
     return this.tipoFuenteRepository.FKTipoFuenteValor(id).create(valorInspec);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/tipo-fuentes/{id}/valor-inspecs', {
     responses: {
       '200': {
@@ -93,6 +96,7 @@ export class TipoFuenteValorInspecController {
     return this.tipoFuenteRepository.FKTipoFuenteValor(id).patch(valorInspec, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/tipo-fuentes/{id}/valor-inspecs', {
     responses: {
       '200': {

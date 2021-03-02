@@ -1,21 +1,27 @@
+
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {Nits} from '../models';
 import {NitsRepository} from '../repositories';
@@ -23,9 +29,10 @@ import {NitsRepository} from '../repositories';
 export class NitsController {
   constructor(
     @repository(NitsRepository)
-    public nitsRepository : NitsRepository,
-  ) {}
+    public nitsRepository: NitsRepository,
+  ) { }
 
+  @authenticate('TokenStrategy')
   @post('/nits')
   @response(200, {
     description: 'Nits model instance',
@@ -37,7 +44,7 @@ export class NitsController {
         'application/json': {
           schema: getModelSchemaRef(Nits, {
             title: 'NewNits',
-            
+
           }),
         },
       },
@@ -76,6 +83,7 @@ export class NitsController {
     return this.nitsRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/nits')
   @response(200, {
     description: 'Nits PATCH success count',
@@ -95,6 +103,7 @@ export class NitsController {
     return this.nitsRepository.updateAll(nits, where);
   }
 
+  @authenticate('TokenStrategy')
   @get('/nits/{id}')
   @response(200, {
     description: 'Nits model instance',
@@ -111,6 +120,7 @@ export class NitsController {
     return this.nitsRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/nits/{id}')
   @response(204, {
     description: 'Nits PATCH success',
@@ -129,6 +139,7 @@ export class NitsController {
     await this.nitsRepository.updateById(id, nits);
   }
 
+  @authenticate('TokenStrategy')
   @put('/nits/{id}')
   @response(204, {
     description: 'Nits PUT success',
@@ -140,6 +151,7 @@ export class NitsController {
     await this.nitsRepository.replaceById(id, nits);
   }
 
+  @authenticate('TokenStrategy')
   @del('/nits/{id}')
   @response(204, {
     description: 'Nits DELETE success',

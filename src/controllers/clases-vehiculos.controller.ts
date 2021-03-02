@@ -1,9 +1,10 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +14,11 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   Clases,
-  Vehiculos,
+  Vehiculos
 } from '../models';
 import {ClasesRepository} from '../repositories';
 
@@ -45,6 +46,7 @@ export class ClasesVehiculosController {
     return this.clasesRepository.FKClaseVeh(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/clases/{id}/vehiculos', {
     responses: {
       '200': {
@@ -70,6 +72,7 @@ export class ClasesVehiculosController {
     return this.clasesRepository.FKClaseVeh(id).create(vehiculos);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/clases/{id}/vehiculos', {
     responses: {
       '200': {
@@ -93,6 +96,7 @@ export class ClasesVehiculosController {
     return this.clasesRepository.FKClaseVeh(id).patch(vehiculos, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/clases/{id}/vehiculos', {
     responses: {
       '200': {

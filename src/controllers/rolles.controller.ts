@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -30,6 +31,7 @@ export class RollesController {
     public rollesRepository: RollesRepository,
   ) { }
 
+  @authenticate('TokenStrategy')
   @post('/rolles')
   @response(200, {
     description: 'Rolles model instance',
@@ -79,6 +81,7 @@ export class RollesController {
     return this.rollesRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/rolles')
   @response(200, {
     description: 'Rolles PATCH success count',
@@ -114,6 +117,7 @@ export class RollesController {
     return this.rollesRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/rolles/{id}')
   @response(204, {
     description: 'Rolles PATCH success',
@@ -132,6 +136,7 @@ export class RollesController {
     await this.rollesRepository.updateById(id, rolles);
   }
 
+  @authenticate('TokenStrategy')
   @put('/rolles/{id}')
   @response(204, {
     description: 'Rolles PUT success',
@@ -143,6 +148,7 @@ export class RollesController {
     await this.rollesRepository.replaceById(id, rolles);
   }
 
+  @authenticate('TokenStrategy')
   @del('/rolles/{id}')
   @response(204, {
     description: 'Rolles DELETE success',

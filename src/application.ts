@@ -1,14 +1,17 @@
+import {AuthenticationBindings, AuthenticationComponent} from '@loopback/authentication';
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig} from '@loopback/core';
-import {
-  RestExplorerBindings,
-  RestExplorerComponent,
-} from '@loopback/rest-explorer';
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
+import {
+  RestExplorerBindings,
+  RestExplorerComponent
+} from '@loopback/rest-explorer';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
+import {AuthStrategyProvider} from './providers/auth-strategy.provider';
 import {MySequence} from './sequence';
+
 
 export {ApplicationConfig};
 
@@ -17,10 +20,6 @@ export class PrevenTaxApp extends BootMixin(
 ) {
   constructor(options: ApplicationConfig = {}) {
     super(options);
-
-    // Set up the custom sequence
-    this.sequence(MySequence);
-
     // Set up default home page
     this.static('/', path.join(__dirname, '../public'));
 
@@ -32,6 +31,15 @@ export class PrevenTaxApp extends BootMixin(
 
     this.projectRoot = __dirname;
     // Customize @loopback/boot Booter Conventions here
+
+    this.component(AuthenticationComponent);
+    this.bind(AuthenticationBindings.STRATEGY).toProvider(
+      AuthStrategyProvider,
+    );
+
+    // Set up the custom sequence
+    this.sequence(MySequence);
+
     this.bootOptions = {
       controllers: {
         // Customize ControllerBooter Conventions here

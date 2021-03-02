@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -42,6 +43,7 @@ export class CiudadesNitsController {
     return this.ciudadesRepository.FKCiuNit(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/ciudades/{id}/nits', {
     responses: {
       '200': {
@@ -67,6 +69,7 @@ export class CiudadesNitsController {
     return this.ciudadesRepository.FKCiuNit(id).create(nits);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/ciudades/{id}/nits', {
     responses: {
       '200': {
@@ -90,6 +93,7 @@ export class CiudadesNitsController {
     return this.ciudadesRepository.FKCiuNit(id).patch(nits, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/ciudades/{id}/nits', {
     responses: {
       '200': {

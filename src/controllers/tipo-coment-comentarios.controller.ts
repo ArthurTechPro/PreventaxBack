@@ -1,9 +1,10 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +14,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  TipoComent,
-  Comentarios,
+  Comentarios, TipoComent
 } from '../models';
 import {TipoComentRepository} from '../repositories';
 
@@ -45,6 +45,7 @@ export class TipoComentComentariosController {
     return this.tipoComentRepository.FKTipComet(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/tipo-coments/{id}/comentarios', {
     responses: {
       '200': {
@@ -70,6 +71,7 @@ export class TipoComentComentariosController {
     return this.tipoComentRepository.FKTipComet(id).create(comentarios);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/tipo-coments/{id}/comentarios', {
     responses: {
       '200': {
@@ -93,6 +95,7 @@ export class TipoComentComentariosController {
     return this.tipoComentRepository.FKTipComet(id).patch(comentarios, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/tipo-coments/{id}/comentarios', {
     responses: {
       '200': {

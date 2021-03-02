@@ -1,21 +1,26 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {Inspecciones} from '../models';
 import {InspeccionesRepository} from '../repositories';
@@ -23,9 +28,10 @@ import {InspeccionesRepository} from '../repositories';
 export class InspeccionesController {
   constructor(
     @repository(InspeccionesRepository)
-    public inspeccionesRepository : InspeccionesRepository,
-  ) {}
+    public inspeccionesRepository: InspeccionesRepository,
+  ) { }
 
+  @authenticate('TokenStrategy')
   @post('/inspecciones')
   @response(200, {
     description: 'Inspecciones model instance',
@@ -76,6 +82,7 @@ export class InspeccionesController {
     return this.inspeccionesRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/inspecciones')
   @response(200, {
     description: 'Inspecciones PATCH success count',
@@ -111,6 +118,7 @@ export class InspeccionesController {
     return this.inspeccionesRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/inspecciones/{id}')
   @response(204, {
     description: 'Inspecciones PATCH success',
@@ -129,6 +137,7 @@ export class InspeccionesController {
     await this.inspeccionesRepository.updateById(id, inspecciones);
   }
 
+  @authenticate('TokenStrategy')
   @put('/inspecciones/{id}')
   @response(204, {
     description: 'Inspecciones PUT success',
@@ -140,6 +149,7 @@ export class InspeccionesController {
     await this.inspeccionesRepository.replaceById(id, inspecciones);
   }
 
+  @authenticate('TokenStrategy')
   @del('/inspecciones/{id}')
   @response(204, {
     description: 'Inspecciones DELETE success',

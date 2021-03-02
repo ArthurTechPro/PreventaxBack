@@ -1,9 +1,10 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +14,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  Productos,
-  Inspecciones,
+  Inspecciones, Productos
 } from '../models';
 import {ProductosRepository} from '../repositories';
 
@@ -25,6 +25,7 @@ export class ProductosInspeccionesController {
   constructor(
     @repository(ProductosRepository) protected productosRepository: ProductosRepository,
   ) { }
+
 
   @get('/productos/{id}/inspecciones', {
     responses: {
@@ -45,6 +46,7 @@ export class ProductosInspeccionesController {
     return this.productosRepository.FKProducInspec(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/productos/{id}/inspecciones', {
     responses: {
       '200': {
@@ -70,6 +72,7 @@ export class ProductosInspeccionesController {
     return this.productosRepository.FKProducInspec(id).create(inspecciones);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/productos/{id}/inspecciones', {
     responses: {
       '200': {
@@ -93,6 +96,7 @@ export class ProductosInspeccionesController {
     return this.productosRepository.FKProducInspec(id).patch(inspecciones, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/productos/{id}/inspecciones', {
     responses: {
       '200': {

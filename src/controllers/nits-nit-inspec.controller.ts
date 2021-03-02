@@ -1,9 +1,10 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +14,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  Nits,
-  NitInspec,
+  NitInspec, Nits
 } from '../models';
 import {NitsRepository} from '../repositories';
 
@@ -45,6 +45,7 @@ export class NitsNitInspecController {
     return this.nitsRepository.FKNitsInspec(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/nits/{id}/nit-inspecs', {
     responses: {
       '200': {
@@ -70,6 +71,7 @@ export class NitsNitInspecController {
     return this.nitsRepository.FKNitsInspec(id).create(nitInspec);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/nits/{id}/nit-inspecs', {
     responses: {
       '200': {
@@ -93,6 +95,7 @@ export class NitsNitInspecController {
     return this.nitsRepository.FKNitsInspec(id).patch(nitInspec, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/nits/{id}/nit-inspecs', {
     responses: {
       '200': {

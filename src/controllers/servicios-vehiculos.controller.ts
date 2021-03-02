@@ -1,9 +1,10 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +14,11 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   Servicios,
-  Vehiculos,
+  Vehiculos
 } from '../models';
 import {ServiciosRepository} from '../repositories';
 
@@ -45,6 +46,7 @@ export class ServiciosVehiculosController {
     return this.serviciosRepository.FKServicioVeh(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/servicios/{id}/vehiculos', {
     responses: {
       '200': {
@@ -70,6 +72,7 @@ export class ServiciosVehiculosController {
     return this.serviciosRepository.FKServicioVeh(id).create(vehiculos);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/servicios/{id}/vehiculos', {
     responses: {
       '200': {
@@ -93,6 +96,7 @@ export class ServiciosVehiculosController {
     return this.serviciosRepository.FKServicioVeh(id).patch(vehiculos, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/servicios/{id}/vehiculos', {
     responses: {
       '200': {

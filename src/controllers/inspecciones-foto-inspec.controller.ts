@@ -1,9 +1,10 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +14,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  Inspecciones,
-  FotoInspec,
+  FotoInspec, Inspecciones
 } from '../models';
 import {InspeccionesRepository} from '../repositories';
 
@@ -45,6 +45,7 @@ export class InspeccionesFotoInspecController {
     return this.inspeccionesRepository.FKInspecFoto(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/inspecciones/{id}/foto-inspecs', {
     responses: {
       '200': {
@@ -70,6 +71,7 @@ export class InspeccionesFotoInspecController {
     return this.inspeccionesRepository.FKInspecFoto(id).create(fotoInspec);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/inspecciones/{id}/foto-inspecs', {
     responses: {
       '200': {
@@ -93,6 +95,7 @@ export class InspeccionesFotoInspecController {
     return this.inspeccionesRepository.FKInspecFoto(id).patch(fotoInspec, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/inspecciones/{id}/foto-inspecs', {
     responses: {
       '200': {

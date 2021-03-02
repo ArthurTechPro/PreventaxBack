@@ -1,21 +1,26 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {Revisiones} from '../models';
 import {RevisionesRepository} from '../repositories';
@@ -23,9 +28,10 @@ import {RevisionesRepository} from '../repositories';
 export class RevisionesController {
   constructor(
     @repository(RevisionesRepository)
-    public revisionesRepository : RevisionesRepository,
-  ) {}
+    public revisionesRepository: RevisionesRepository,
+  ) { }
 
+  @authenticate('TokenStrategy')
   @post('/revisiones')
   @response(200, {
     description: 'Revisiones model instance',
@@ -76,6 +82,7 @@ export class RevisionesController {
     return this.revisionesRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/revisiones')
   @response(200, {
     description: 'Revisiones PATCH success count',
@@ -95,6 +102,7 @@ export class RevisionesController {
     return this.revisionesRepository.updateAll(revisiones, where);
   }
 
+  @authenticate('TokenStrategy')
   @get('/revisiones/{id}')
   @response(200, {
     description: 'Revisiones model instance',
@@ -111,6 +119,7 @@ export class RevisionesController {
     return this.revisionesRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/revisiones/{id}')
   @response(204, {
     description: 'Revisiones PATCH success',
@@ -129,6 +138,7 @@ export class RevisionesController {
     await this.revisionesRepository.updateById(id, revisiones);
   }
 
+  @authenticate('TokenStrategy')
   @put('/revisiones/{id}')
   @response(204, {
     description: 'Revisiones PUT success',
@@ -140,6 +150,7 @@ export class RevisionesController {
     await this.revisionesRepository.replaceById(id, revisiones);
   }
 
+  @authenticate('TokenStrategy')
   @del('/revisiones/{id}')
   @response(204, {
     description: 'Revisiones DELETE success',

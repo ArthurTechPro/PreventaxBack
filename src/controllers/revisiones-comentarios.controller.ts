@@ -1,9 +1,10 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +14,10 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
-  Revisiones,
-  Comentarios,
+  Comentarios, Revisiones
 } from '../models';
 import {RevisionesRepository} from '../repositories';
 
@@ -45,6 +45,7 @@ export class RevisionesComentariosController {
     return this.revisionesRepository.FKRevisionComet(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/revisiones/{id}/comentarios', {
     responses: {
       '200': {
@@ -70,6 +71,7 @@ export class RevisionesComentariosController {
     return this.revisionesRepository.FKRevisionComet(id).create(comentarios);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/revisiones/{id}/comentarios', {
     responses: {
       '200': {
@@ -93,6 +95,7 @@ export class RevisionesComentariosController {
     return this.revisionesRepository.FKRevisionComet(id).patch(comentarios, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/revisiones/{id}/comentarios', {
     responses: {
       '200': {

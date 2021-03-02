@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -30,6 +31,7 @@ export class VehiculosController {
     public vehiculosRepository: VehiculosRepository,
   ) { }
 
+  @authenticate('TokenStrategy')
   @post('/vehiculos')
   @response(200, {
     description: 'Vehiculos model instance',
@@ -80,6 +82,7 @@ export class VehiculosController {
     return this.vehiculosRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/vehiculos')
   @response(200, {
     description: 'Vehiculos PATCH success count',
@@ -115,6 +118,7 @@ export class VehiculosController {
     return this.vehiculosRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/vehiculos/{id}')
   @response(204, {
     description: 'Vehiculos PATCH success',
@@ -133,6 +137,7 @@ export class VehiculosController {
     await this.vehiculosRepository.updateById(id, vehiculos);
   }
 
+  @authenticate('TokenStrategy')
   @put('/vehiculos/{id}')
   @response(204, {
     description: 'Vehiculos PUT success',
@@ -144,6 +149,7 @@ export class VehiculosController {
     await this.vehiculosRepository.replaceById(id, vehiculos);
   }
 
+  @authenticate('TokenStrategy')
   @del('/vehiculos/{id}')
   @response(204, {
     description: 'Vehiculos DELETE success',

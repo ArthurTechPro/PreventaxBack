@@ -1,21 +1,26 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {Preguntas} from '../models';
 import {PreguntasRepository} from '../repositories';
@@ -23,9 +28,10 @@ import {PreguntasRepository} from '../repositories';
 export class PreguntasController {
   constructor(
     @repository(PreguntasRepository)
-    public preguntasRepository : PreguntasRepository,
-  ) {}
+    public preguntasRepository: PreguntasRepository,
+  ) { }
 
+  @authenticate('TokenStrategy')
   @post('/preguntas')
   @response(200, {
     description: 'Preguntas model instance',
@@ -76,6 +82,7 @@ export class PreguntasController {
     return this.preguntasRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/preguntas')
   @response(200, {
     description: 'Preguntas PATCH success count',
@@ -111,6 +118,7 @@ export class PreguntasController {
     return this.preguntasRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/preguntas/{id}')
   @response(204, {
     description: 'Preguntas PATCH success',
@@ -129,6 +137,7 @@ export class PreguntasController {
     await this.preguntasRepository.updateById(id, preguntas);
   }
 
+  @authenticate('TokenStrategy')
   @put('/preguntas/{id}')
   @response(204, {
     description: 'Preguntas PUT success',
@@ -140,6 +149,7 @@ export class PreguntasController {
     await this.preguntasRepository.replaceById(id, preguntas);
   }
 
+  @authenticate('TokenStrategy')
   @del('/preguntas/{id}')
   @response(204, {
     description: 'Preguntas DELETE success',

@@ -1,9 +1,10 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +14,11 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   Productos,
-  Revisiones,
+  Revisiones
 } from '../models';
 import {ProductosRepository} from '../repositories';
 
@@ -45,6 +46,7 @@ export class ProductosRevisionesController {
     return this.productosRepository.FKProductoRevision(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/productos/{id}/revisiones', {
     responses: {
       '200': {
@@ -70,6 +72,7 @@ export class ProductosRevisionesController {
     return this.productosRepository.FKProductoRevision(id).create(revisiones);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/productos/{id}/revisiones', {
     responses: {
       '200': {
@@ -93,6 +96,7 @@ export class ProductosRevisionesController {
     return this.productosRepository.FKProductoRevision(id).patch(revisiones, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/productos/{id}/revisiones', {
     responses: {
       '200': {

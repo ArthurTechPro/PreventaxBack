@@ -76,7 +76,7 @@ export class AuthService {
       data: {
         _id: ususario.IdNit,
         username: ususario.Usuario,
-        role: ususario.IdRoll,
+        roll: ususario.IdRoll,
         isAdmin: ususario.IsAdmin
       }
     },

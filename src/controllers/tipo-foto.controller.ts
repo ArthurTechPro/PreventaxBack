@@ -1,21 +1,26 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {TipoFoto} from '../models';
 import {TipoFotoRepository} from '../repositories';
@@ -23,9 +28,10 @@ import {TipoFotoRepository} from '../repositories';
 export class TipoFotoController {
   constructor(
     @repository(TipoFotoRepository)
-    public tipoFotoRepository : TipoFotoRepository,
-  ) {}
+    public tipoFotoRepository: TipoFotoRepository,
+  ) { }
 
+  @authenticate('TokenStrategy')
   @post('/tipo-fotos')
   @response(200, {
     description: 'TipoFoto model instance',
@@ -76,6 +82,7 @@ export class TipoFotoController {
     return this.tipoFotoRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/tipo-fotos')
   @response(200, {
     description: 'TipoFoto PATCH success count',
@@ -111,6 +118,7 @@ export class TipoFotoController {
     return this.tipoFotoRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/tipo-fotos/{id}')
   @response(204, {
     description: 'TipoFoto PATCH success',
@@ -129,6 +137,7 @@ export class TipoFotoController {
     await this.tipoFotoRepository.updateById(id, tipoFoto);
   }
 
+  @authenticate('TokenStrategy')
   @put('/tipo-fotos/{id}')
   @response(204, {
     description: 'TipoFoto PUT success',
@@ -140,6 +149,7 @@ export class TipoFotoController {
     await this.tipoFotoRepository.replaceById(id, tipoFoto);
   }
 
+  @authenticate('TokenStrategy')
   @del('/tipo-fotos/{id}')
   @response(204, {
     description: 'TipoFoto DELETE success',

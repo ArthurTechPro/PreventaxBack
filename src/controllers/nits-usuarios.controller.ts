@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -45,6 +46,7 @@ export class NitsUsuariosController {
     return this.nitsRepository.KFNitUsuario(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/nits/{id}/usuarios', {
     responses: {
       '200': {
@@ -70,6 +72,7 @@ export class NitsUsuariosController {
     return this.nitsRepository.KFNitUsuario(id).create(usuarios);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/nits/{id}/usuarios', {
     responses: {
       '200': {
@@ -93,6 +96,7 @@ export class NitsUsuariosController {
     return this.nitsRepository.KFNitUsuario(id).patch(usuarios, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/nits/{id}/usuarios', {
     responses: {
       '200': {

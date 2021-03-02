@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -30,6 +31,7 @@ export class GenDeptosController {
     public deptosRepository: DeptosRepository,
   ) { }
 
+  @authenticate('TokenStrategy')
   @post('/deptos')
   @response(200, {
     description: 'GenDeptos model instance',
@@ -80,6 +82,7 @@ export class GenDeptosController {
     return this.deptosRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/deptos')
   @response(200, {
     description: 'GenDeptos PATCH success count',
@@ -115,6 +118,7 @@ export class GenDeptosController {
     return this.deptosRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/deptos/{id}')
   @response(204, {
     description: 'GenDeptos PATCH success',
@@ -133,6 +137,7 @@ export class GenDeptosController {
     await this.deptosRepository.updateById(id, deptos);
   }
 
+  @authenticate('TokenStrategy')
   @put('/deptos/{id}')
   @response(204, {
     description: 'GenDeptos PUT success',
@@ -144,6 +149,7 @@ export class GenDeptosController {
     await this.deptosRepository.replaceById(id, deptos);
   }
 
+  @authenticate('TokenStrategy')
   @del('/deptos/{id}')
   @response(204, {
     description: 'GenDeptos DELETE success',

@@ -1,21 +1,26 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {FotoInspec} from '../models';
 import {FotoInspecRepository} from '../repositories';
@@ -23,9 +28,10 @@ import {FotoInspecRepository} from '../repositories';
 export class FotoInspecController {
   constructor(
     @repository(FotoInspecRepository)
-    public fotoInspecRepository : FotoInspecRepository,
-  ) {}
+    public fotoInspecRepository: FotoInspecRepository,
+  ) { }
 
+  @authenticate('TokenStrategy')
   @post('/foto-inspecs')
   @response(200, {
     description: 'FotoInspec model instance',
@@ -76,6 +82,7 @@ export class FotoInspecController {
     return this.fotoInspecRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/foto-inspecs')
   @response(200, {
     description: 'FotoInspec PATCH success count',
@@ -111,6 +118,7 @@ export class FotoInspecController {
     return this.fotoInspecRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/foto-inspecs/{id}')
   @response(204, {
     description: 'FotoInspec PATCH success',
@@ -129,6 +137,7 @@ export class FotoInspecController {
     await this.fotoInspecRepository.updateById(id, fotoInspec);
   }
 
+  @authenticate('TokenStrategy')
   @put('/foto-inspecs/{id}')
   @response(204, {
     description: 'FotoInspec PUT success',
@@ -140,6 +149,7 @@ export class FotoInspecController {
     await this.fotoInspecRepository.replaceById(id, fotoInspec);
   }
 
+  @authenticate('TokenStrategy')
   @del('/foto-inspecs/{id}')
   @response(204, {
     description: 'FotoInspec DELETE success',

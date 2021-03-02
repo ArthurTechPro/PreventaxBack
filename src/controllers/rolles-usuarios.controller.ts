@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -45,6 +46,7 @@ export class RollesUsuariosController {
     return this.rollesRepository.FKRollUsu(id).find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @post('/rolles/{id}/usuarios', {
     responses: {
       '200': {
@@ -70,6 +72,7 @@ export class RollesUsuariosController {
     return this.rollesRepository.FKRollUsu(id).create(usuarios);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/rolles/{id}/usuarios', {
     responses: {
       '200': {
@@ -93,6 +96,7 @@ export class RollesUsuariosController {
     return this.rollesRepository.FKRollUsu(id).patch(usuarios, where);
   }
 
+  @authenticate('TokenStrategy')
   @del('/rolles/{id}/usuarios', {
     responses: {
       '200': {

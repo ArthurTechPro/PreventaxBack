@@ -1,21 +1,26 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {EstadoInspec} from '../models';
 import {EstadoInspecRepository} from '../repositories';
@@ -23,9 +28,10 @@ import {EstadoInspecRepository} from '../repositories';
 export class EstadoInspecController {
   constructor(
     @repository(EstadoInspecRepository)
-    public estadoInspecRepository : EstadoInspecRepository,
-  ) {}
+    public estadoInspecRepository: EstadoInspecRepository,
+  ) { }
 
+  @authenticate('TokenStrategy')
   @post('/estado-inspecs')
   @response(200, {
     description: 'EstadoInspec model instance',
@@ -76,6 +82,7 @@ export class EstadoInspecController {
     return this.estadoInspecRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/estado-inspecs')
   @response(200, {
     description: 'EstadoInspec PATCH success count',
@@ -111,6 +118,7 @@ export class EstadoInspecController {
     return this.estadoInspecRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/estado-inspecs/{id}')
   @response(204, {
     description: 'EstadoInspec PATCH success',
@@ -129,6 +137,7 @@ export class EstadoInspecController {
     await this.estadoInspecRepository.updateById(id, estadoInspec);
   }
 
+  @authenticate('TokenStrategy')
   @put('/estado-inspecs/{id}')
   @response(204, {
     description: 'EstadoInspec PUT success',
@@ -140,6 +149,7 @@ export class EstadoInspecController {
     await this.estadoInspecRepository.replaceById(id, estadoInspec);
   }
 
+  @authenticate('TokenStrategy')
   @del('/estado-inspecs/{id}')
   @response(204, {
     description: 'EstadoInspec DELETE success',

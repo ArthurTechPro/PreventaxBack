@@ -1,21 +1,26 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {ValorInspec} from '../models';
 import {ValorInspecRepository} from '../repositories';
@@ -23,9 +28,10 @@ import {ValorInspecRepository} from '../repositories';
 export class ValorInspecController {
   constructor(
     @repository(ValorInspecRepository)
-    public valorInspecRepository : ValorInspecRepository,
-  ) {}
+    public valorInspecRepository: ValorInspecRepository,
+  ) { }
 
+  @authenticate('TokenStrategy')
   @post('/valor-inspecs')
   @response(200, {
     description: 'ValorInspec model instance',
@@ -46,6 +52,7 @@ export class ValorInspecController {
   ): Promise<ValorInspec> {
     return this.valorInspecRepository.create(valorInspec);
   }
+
 
   @get('/valor-inspecs/count')
   @response(200, {
@@ -76,6 +83,7 @@ export class ValorInspecController {
     return this.valorInspecRepository.find(filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/valor-inspecs')
   @response(200, {
     description: 'ValorInspec PATCH success count',
@@ -111,6 +119,7 @@ export class ValorInspecController {
     return this.valorInspecRepository.findById(id, filter);
   }
 
+  @authenticate('TokenStrategy')
   @patch('/valor-inspecs/{id}')
   @response(204, {
     description: 'ValorInspec PATCH success',
@@ -129,6 +138,7 @@ export class ValorInspecController {
     await this.valorInspecRepository.updateById(id, valorInspec);
   }
 
+  @authenticate('TokenStrategy')
   @put('/valor-inspecs/{id}')
   @response(204, {
     description: 'ValorInspec PUT success',
@@ -140,6 +150,7 @@ export class ValorInspecController {
     await this.valorInspecRepository.replaceById(id, valorInspec);
   }
 
+  @authenticate('TokenStrategy')
   @del('/valor-inspecs/{id}')
   @response(204, {
     description: 'ValorInspec DELETE success',
